@@ -1,4 +1,4 @@
-﻿using Crm.Dtos.LeadSource;
+﻿using Crm.Dtos.LeadStatus;
 using Crm.Entities;
 using Crm.Infrastructure.Repositories;
 using Crm.Utilities;
@@ -12,35 +12,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crm.DataLayer.Repositories
 {
-    public class LeadSourceRepository: ILeadSourceRepository
+    public class LeadStatusRepository : ILeadStatusRepository
     {
         private readonly DataContext _dataContext;
 
-        public LeadSourceRepository(DataContext dataContext)
+        public LeadStatusRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-        public async Task AddAsync(LeadSource entity)
+        public async Task AddAsync(LeadStatus entity)
         {
-            await _dataContext.LeadSource.AddAsync(entity);
+            await _dataContext.LeadStatus.AddAsync(entity);
         }
 
-        public void Edit(LeadSource entity)
+        public void Edit(LeadStatus entity)
         {
-            _dataContext.LeadSource.Update(entity);
+            _dataContext.LeadStatus.Update(entity);
         }
 
-        public async Task<LeadSource> GetAsync(int id)
+        public async Task<LeadStatus> GetAsync(int id)
         {
-            return await _dataContext.LeadSource.FindAsync(id);
+            return await _dataContext.LeadStatus.FindAsync(id);
         }
 
-        public async Task<LeadSourceDetailDto> GetDetailAsync(int id)
+        public async Task<LeadStatusDetailDto> GetDetailAsync(int id)
         {
-            return await (from s in _dataContext.LeadSource
+            return await (from s in _dataContext.LeadStatus
                           where s.Id == id
-                          select new LeadSourceDetailDto
+                          select new LeadStatusDetailDto
                           {
                               Id = s.Id,
                               Name = s.Name
@@ -49,7 +49,7 @@ namespace Crm.DataLayer.Repositories
                           .SingleOrDefaultAsync();
         }
 
-        public async Task<JqDataTableResponse<LeadSourceDetailDto>> GetPagedResultAsync(JqDataTableRequest model)
+        public async Task<JqDataTableResponse<LeadStatusDetailDto>> GetPagedResultAsync(JqDataTableRequest model)
         {
             if (model.Length == 0)
             {
@@ -60,7 +60,7 @@ namespace Crm.DataLayer.Repositories
 
             var linqStmt = (from s in _dataContext.LeadSource
                             where s.Status != Constants.RecordStatus.Deleted && (filterKey == null || EF.Functions.Like(s.Name, "%" + filterKey + "%"))
-                            select new LeadSourceDetailDto
+                            select new LeadStatusDetailDto
                             {
                                 Id = s.Id,
                                 Name = s.Name
@@ -69,7 +69,7 @@ namespace Crm.DataLayer.Repositories
 
             var sortExpresstion = model.GetSortExpression();
 
-            var pagedResult = new JqDataTableResponse<LeadSourceDetailDto>
+            var pagedResult = new JqDataTableResponse<LeadStatusDetailDto>
             {
                 RecordsTotal = await _dataContext.LeadSource.CountAsync(x => x.Status != Constants.RecordStatus.Deleted),
                 RecordsFiltered = await linqStmt.CountAsync(),
@@ -80,9 +80,9 @@ namespace Crm.DataLayer.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var data = await _dataContext.LeadSource.FindAsync(id);
+            var data = await _dataContext.LeadStatus.FindAsync(id);
             data.Status = Constants.RecordStatus.Deleted;
-            _dataContext.LeadSource.Update(data);
+            _dataContext.LeadStatus.Update(data);
         }
 
     }

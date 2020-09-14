@@ -1,5 +1,5 @@
 ﻿using Crm.Entities;
-using Crm.Models.LeadSource;
+using Crm.Models.LeadStatus;
 using Crm.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Crm.Factories
 {
-    public class LeadSourceFactory
+    public class LeadStatusFactory
     {
-        public static LeadSource Create(LeadSourceAddModel model, string userId)
+        public static LeadStatus Create(LeadStatusAddModel model, string userId)
         {
-            var data = new LeadSource
+            var data = new LeadStatus
             {
                 Name = model.Name,
                 Status = Constants.RecordStatus.Active,
@@ -20,7 +20,7 @@ namespace Crm.Factories
             };
             return data;
         }
-        public static void Create(LeadSourceEditModel model, LeadSource entity, string userId)
+        public static void Create(LeadStatusEditModel model, LeadStatus entity, string userId)
         {
             entity.Name = model.Name;
         }

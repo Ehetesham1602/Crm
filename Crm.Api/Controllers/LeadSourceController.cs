@@ -90,5 +90,13 @@ namespace Crm.Api.Controllers
         {
             return Ok(await _manager.GetPagedResultAsync(model));
         }
+        [HttpPost]
+        [Route("delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _manager.DeleteAsync(id);
+
+            return Ok();
+        }
     }
 }

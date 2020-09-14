@@ -11,11 +11,13 @@ namespace Crm.DataLayer
         public DataContext(DbContextOptions options) : base(options) { }
 
         public DbSet<LeadSource> LeadSource { get; set; }
+        public DbSet<LeadStatus> LeadStatus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new LeadSourceConfiguration());
+            modelBuilder.ApplyConfiguration(new LeadStatusConfiguration());
 
         }
     }

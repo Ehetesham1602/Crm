@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Crm.Entities
 {
-    public class LeadSource
+    public class LeadStatus
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Crm.DataLayer.EntityConfigurations
 {
-    public class LeadSourceConfiguration : IEntityTypeConfiguration<LeadSource>
+    public class LeadStatusConfiguration : IEntityTypeConfiguration<LeadStatus>
     {
-        public void Configure(EntityTypeBuilder<LeadSource> builder)
+        public void Configure(EntityTypeBuilder<LeadStatus> builder)
         {
-            builder.ToTable("LeadSource");
+            builder.ToTable("LeadStatus");
 
             builder.HasKey(x => x.Id);
 
