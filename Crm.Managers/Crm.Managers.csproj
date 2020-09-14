@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ReportManager.cs~RF47dd51be.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Crm.DataLayer\Crm.DataLayer.csproj" />
+    <ProjectReference Include="..\Crm.Dtos\Crm.Dtos.csproj" />
+    <ProjectReference Include="..\Crm.Factories\Crm.Factories.csproj" />
+    <ProjectReference Include="..\Crm.Infrastructure\Crm.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

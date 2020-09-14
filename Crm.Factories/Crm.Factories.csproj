@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Crm.Entities\Crm.Entities.csproj" />
+    <ProjectReference Include="..\Crm.Models\Crm.Models.csproj" />
+  </ItemGroup>
+
+</Project>
