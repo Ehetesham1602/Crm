@@ -30,11 +30,13 @@ namespace Crm.Config
             services.AddScoped<ISeedManager, SeedManager>();
             services.AddScoped<ILeadSourceManager, LeadSourceManager>();
             services.AddScoped<ILeadStatusManager, LeadStatusManager>();
+            services.AddScoped<IQualifyQuestionManager, QualifyQuestionManager>();
         }
         public static void ConfigureRepository(IServiceCollection services)
         {
             services.AddScoped<ILeadSourceRepository, LeadSourceRepository>();
             services.AddScoped<ILeadStatusRepository, LeadStatusRepository>();
+            services.AddScoped<IQualifyQuestionRepository, QualifyQuestionRepository>();
 
         }
         public static void ConfigureServices(IServiceCollection services)

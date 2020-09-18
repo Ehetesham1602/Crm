@@ -58,7 +58,7 @@ namespace Crm.DataLayer.Repositories
 
             var filterKey = model.Search.Value;
 
-            var linqStmt = (from s in _dataContext.LeadSource
+            var linqStmt = (from s in _dataContext.LeadStatus
                             where s.Status != Constants.RecordStatus.Deleted && (filterKey == null || EF.Functions.Like(s.Name, "%" + filterKey + "%"))
                             select new LeadStatusDetailDto
                             {

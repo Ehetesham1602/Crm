@@ -7,17 +7,9 @@
         public const int DefaultPageSize = 10;
 
         public enum RecordStatus { Created, Active, Inactive, Deleted }
+        public enum FieldTypeId { Text, Select, Radio, Checkbox }
 
-        public enum BillPaymentMode { Cash, Transfer, Cheque , CreditCard }
 
-        public enum PaymentMode { Cash, Transfer, Check }
-
-        public enum InvoiceStatus { Pending, Paid, Deleted ,Overdue}
-
-        public enum BillStatus { Pending, Paid, Deleted, Overdue }
-        public enum ContactType { Customer, Vendor }
-        public enum TransactionType {CustomerAdvancePayment, InvoicePayment, VendorAdvancePayment, BillPayment, AccountIncome, AccountExpence}
-        public enum TransactionStatus { Pending, Paid }
         public struct Account
         {
             public const int AccountReceiveable = 1;
