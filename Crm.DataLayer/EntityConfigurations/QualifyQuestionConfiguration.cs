@@ -19,6 +19,7 @@ namespace Crm.DataLayer.EntityConfigurations
             builder.Property(x => x.QuestionName).IsRequired();
             builder.Property(x => x.FieldTypeId).IsRequired();
             builder.Property(x => x.QuestionCode).IsRequired(false);
+            builder.Property(x => x.Options).IsRequired(false);
 
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();

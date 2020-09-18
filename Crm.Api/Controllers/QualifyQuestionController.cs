@@ -117,6 +117,14 @@ namespace Crm.Api.Controllers
             return Ok();
         }
 
+
+        [HttpGet]
+        [Route("getQualifyAnwserByEntityId/{id}")]
+        public async Task<IActionResult> GetQualifyAnser(int id)
+        {
+            return Ok(await _manager.GetAnswerById(id));
+        }
+
     }
 }
 

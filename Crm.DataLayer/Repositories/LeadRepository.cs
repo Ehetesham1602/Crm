@@ -1,4 +1,6 @@
 ﻿using Crm.Dtos.Lead;
+using Crm.Dtos.LeadSource;
+using Crm.Dtos.LeadStatus;
 using Crm.Entities;
 using Crm.Infrastructure.Repositories;
 using Crm.Utilities;
@@ -74,6 +76,36 @@ namespace Crm.DataLayer.Repositories
                 Data = await linqstmt.OrderBy(sortExpression).Skip(model.Start).Take(model.Length).ToListAsync()
             };
             return pagedResult;
+        }
+
+        public async Task<LeadDto> GetDetailAsync(int id)
+        {
+            return await (from l in _dataContext.Lead
+                          where l.Id == id
+                          select new LeadDto
+                          {
+                              Id = l.Id,
+                              FirstName = l.FirstName,
+                              LastName = l.LastName,
+                              Email = l.Email,
+                              Website = l.Website,
+                              Mobile = l.Mobile,
+                              LeadSourceId = l.LeadSourceId,
+                              LeadStatusId = l.LeadStatusId,
+                              Status = l.Status,
+                              LeadSource = new LeadSourceDetailDto
+                              {
+                                  Name = l.LeadSource.Name,
+                                  Id = l.LeadSource.Id
+                              },
+                               LeadStatus = new LeadStatusDetailDto
+                               {
+                                   Name = l.LeadStatus.Name,
+                                   Id = l.LeadStatus.Id
+                               }
+                          })
+                          .AsNoTracking()
+                          .SingleOrDefaultAsync();
         }
 
 

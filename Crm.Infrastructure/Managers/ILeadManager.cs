@@ -13,6 +13,7 @@ namespace Crm.Infrastructure.Managers
         Task AddAsync(LeadModel model);
         Task EditAsync(LeadModel model);
         Task DeleteAsync(int id);
+        Task<LeadDto> GetDetailAsync(int id);
         Task<JqDataTableResponse<LeadDto>> GetPagedResultAsync(JqDataTableRequest model);
 
     }

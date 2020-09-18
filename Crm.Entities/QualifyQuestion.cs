@@ -10,6 +10,7 @@ namespace Crm.Entities
         public int Id { get; set; }
         public string QuestionName { get; set; }
         public string QuestionCode { get; set; }
+        public string Options { get; set; }
         public Constants.FieldTypeId FieldTypeId { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }

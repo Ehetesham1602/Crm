@@ -45,7 +45,8 @@ namespace Crm.DataLayer.Repositories
                               Id = s.Id,
                               QuestionCode = s.QuestionCode,
                               QuestionName = s.QuestionName,
-                              FieldTypeId = s.FieldTypeId
+                              FieldTypeId = s.FieldTypeId,
+                              Options = s.Options
                           })
                           .AsNoTracking()
                           .SingleOrDefaultAsync();
@@ -67,7 +68,8 @@ namespace Crm.DataLayer.Repositories
                                 Id = s.Id,
                                 QuestionName = s.QuestionName,
                                 QuestionCode = s.QuestionCode,
-                                FieldTypeId = s.FieldTypeId
+                                FieldTypeId = s.FieldTypeId,
+                                Options = s.Options
                             })
                             .AsNoTracking();
 

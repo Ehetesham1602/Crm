@@ -4,14 +4,16 @@ using Crm.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crm.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200918150113_leadchange180902020")]
+    partial class leadchange180902020
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,113 +82,6 @@ namespace Crm.DataLayer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Crm.Entities.ActivityCall", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CallDate");
-
-                    b.Property<string>("CallDescription")
-                        .IsRequired();
-
-                    b.Property<string>("CallPurpose")
-                        .IsRequired();
-
-                    b.Property<string>("CallSubject")
-                        .IsRequired();
-
-                    b.Property<string>("CallTime")
-                        .IsRequired();
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(40);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("DescriptionHtml")
-                        .IsRequired()
-                        .HasMaxLength(40);
-
-                    b.Property<int>("EntityId");
-
-                    b.Property<int>("EntityMasterId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ActivityCall");
-                });
-
-            modelBuilder.Entity("Crm.Entities.ActivityMeeting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(40);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("DescriptionHtml")
-                        .IsRequired()
-                        .HasMaxLength(40);
-
-                    b.Property<int>("EntityId");
-
-                    b.Property<int>("EntityMasterId");
-
-                    b.Property<DateTime>("MeetingDate");
-
-                    b.Property<string>("MeetingDescription")
-                        .IsRequired();
-
-                    b.Property<string>("MeetingSubject")
-                        .IsRequired();
-
-                    b.Property<string>("MeetingTime")
-                        .IsRequired();
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ActivityMeeting");
-                });
-
-            modelBuilder.Entity("Crm.Entities.ActivityNotes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(40);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("DescriptionHtml")
-                        .IsRequired()
-                        .HasMaxLength(40);
-
-                    b.Property<int>("EntityId");
-
-                    b.Property<int>("EntityMasterId");
-
-                    b.Property<string>("NoteDescription")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ActivityNotes");
                 });
 
             modelBuilder.Entity("Crm.Entities.Lead", b =>
@@ -285,9 +180,7 @@ namespace Crm.DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(40);
+                    b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -297,8 +190,7 @@ namespace Crm.DataLayer.Migrations
 
                     b.Property<string>("QuestionCode");
 
-                    b.Property<string>("QuestionName")
-                        .IsRequired();
+                    b.Property<string>("QuestionName");
 
                     b.Property<int>("Status");
 
@@ -320,7 +212,7 @@ namespace Crm.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QualifyQuestionAnswer");
+                    b.ToTable("QualifyQuestionAnswers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

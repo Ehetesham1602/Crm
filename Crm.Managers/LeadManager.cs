@@ -42,6 +42,11 @@ namespace Crm.Managers
             _leadRepository.Edit(lead);
             await _unitOfWork.SaveChangesAsync();
         }
+        public async Task<LeadDto> GetDetailAsync(int id)
+        {
+            return await _leadRepository.GetDetailAsync(id);
+        }
+
         public async Task DeleteAsync(int id)
         {
             await _leadRepository.DeleteAsync(id);

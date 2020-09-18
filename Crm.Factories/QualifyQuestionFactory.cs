@@ -17,6 +17,7 @@ namespace Crm.Factories
                 QuestionName = model.QuestionName,
                 FieldTypeId = model.FieldTypeId,
                 Status = Constants.RecordStatus.Active,
+                Options = model.Options,
                 CreatedBy = userId ?? "0",
                 CreatedOn = Utility.GetDateTime(),
             };
@@ -27,6 +28,7 @@ namespace Crm.Factories
             entity.QuestionCode = model.QuestionCode;
             entity.QuestionName = model.QuestionName;
             entity.FieldTypeId = model.FieldTypeId;
+            entity.Options = model.Options;
         }
 
         public static void CreateQualifyAnswer(List<QualifyQuestionAnswerAddModel> model,List<QualifyQuestionAnswers> entities)

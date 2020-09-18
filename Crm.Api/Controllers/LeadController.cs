@@ -78,11 +78,10 @@ namespace Crm.Api.Controllers
             return Ok(pagedResult);
         }
 
-        /*[HttpGet]
+        [HttpGet]
         [Route("get-detail/{id}")]
         public async Task<IActionResult> GetDetail(int id)
         {
-
             var lead = await _leadManager.GetDetailAsync(id);
             if (lead == null)
             {
@@ -90,6 +89,6 @@ namespace Crm.Api.Controllers
             }
             return Ok(lead);
 
-        }*/
+        }
     }
 }

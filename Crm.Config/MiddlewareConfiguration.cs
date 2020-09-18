@@ -31,12 +31,18 @@ namespace Crm.Config
             services.AddScoped<ILeadSourceManager, LeadSourceManager>();
             services.AddScoped<ILeadStatusManager, LeadStatusManager>();
             services.AddScoped<IQualifyQuestionManager, QualifyQuestionManager>();
+            services.AddScoped<ILeadManager, LeadManager>();
+            services.AddScoped<IActivitiesManager, ActivitiesManager>();
+
         }
         public static void ConfigureRepository(IServiceCollection services)
         {
             services.AddScoped<ILeadSourceRepository, LeadSourceRepository>();
             services.AddScoped<ILeadStatusRepository, LeadStatusRepository>();
             services.AddScoped<IQualifyQuestionRepository, QualifyQuestionRepository>();
+            services.AddScoped<ILeadRepository, LeadRepository>();
+            services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
+
 
         }
         public static void ConfigureServices(IServiceCollection services)
