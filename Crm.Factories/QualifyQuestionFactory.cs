@@ -29,18 +29,9 @@ namespace Crm.Factories
             entity.FieldTypeId = model.FieldTypeId;
         }
 
-        public static void CreateQualifyAnswer(List<QualifyQuestionAnswerAddModel> model,ICollection<QualifyQuestionAnswers> entities)
+        public static void CreateQualifyAnswer(List<QualifyQuestionAnswerAddModel> model,List<QualifyQuestionAnswers> entities)
         {
-            var datalist = entities;
-           // entities.Remove
-            if (entities != null)
-            {
-                // entities.RemoveAll(datalist);
-                foreach (var item in datalist)
-                {
-                    entities.Remove(item);
-                }
-            }
+     
             foreach(var item in model){
                 var data = new QualifyQuestionAnswers
                 {

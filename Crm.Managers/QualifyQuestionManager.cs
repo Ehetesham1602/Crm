@@ -63,7 +63,9 @@ namespace Crm.Managers
         ///Qualify Question Answers
         public async Task AddQualifyAnswersAsync(List<QualifyQuestionAnswerAddModel> model)
         {
-            List<QualifyQuestionAnswers> item = await _repository.GetAsyncQualifyAnswer(model[0].EntityId);
+           await _repository.DeleteAsyncQuestionAnswer(model[0].EntityId);
+            await _unitOfWork.SaveChangesAsync();
+            List<QualifyQuestionAnswers> item = new List<QualifyQuestionAnswers>();
             QualifyQuestionFactory.CreateQualifyAnswer(model,item);
            await  _repository.AddQualifyAnswerAsync(item);
             await _unitOfWork.SaveChangesAsync();

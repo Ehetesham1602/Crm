@@ -116,6 +116,16 @@ namespace Crm.DataLayer.Repositories
                          .ToListAsync();
         }
 
+        public async Task DeleteAsyncQuestionAnswer(int id)
+        {
+            var data = await _dataContext.QualifyQuestionAnswers.Where(x=> x.EntityId == id).ToListAsync();
+          foreach(var item in data)
+            {
+                _dataContext.QualifyQuestionAnswers.Remove(item);
+            }
+            
+        }
+
     }
 }
 
