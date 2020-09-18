@@ -1,13 +1,16 @@
 ﻿using Crm.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Crm.Entities
+namespace Crm.Models.Lead
 {
-    public class Lead
+    public class LeadModel
     {
+        [Required]
         public int Id { get; set; }
+        [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -18,8 +21,6 @@ namespace Crm.Entities
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
-        public LeadSource LeadSource { get; set; }
-        public LeadStatus LeadStatus { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
     }

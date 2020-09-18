@@ -21,6 +21,7 @@ namespace Crm.DataLayer
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new LeadSourceConfiguration());
             modelBuilder.ApplyConfiguration(new LeadStatusConfiguration());
+            modelBuilder.ApplyConfiguration(new LeadConfiguration());
 
         }
     }
