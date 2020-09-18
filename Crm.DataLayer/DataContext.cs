@@ -14,6 +14,7 @@ namespace Crm.DataLayer
         public DbSet<LeadStatus> LeadStatus { get; set; }
         public DbSet<QualifyQuestion> QualifyQuestion { get; set; }
         public DbSet<QualifyQuestionAnswers> QualifyQuestionAnswers { get; set; }
+        public DbSet<Lead> Lead { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
