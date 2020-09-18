@@ -1,11 +1,13 @@
-﻿using Crm.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Crm.Dtos.LeadSource;
+using Crm.Dtos.LeadStatus;
+using Crm.Utilities;
 
-namespace Crm.Entities
+namespace Crm.Dtos.Lead
 {
-    public class Lead
+    public class LeadDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -18,8 +20,8 @@ namespace Crm.Entities
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
-        public LeadSource LeadSource { get; set; }
-        public LeadStatus LeadStatus { get; set; }
+        public LeadSourceDetailDto LeadSource { get; set; }
+        public LeadStatusDetailDto LeadStatus { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
     }
