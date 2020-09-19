@@ -323,6 +323,40 @@ namespace Crm.DataLayer.Migrations
                     b.ToTable("QualifyQuestionAnswer");
                 });
 
+            modelBuilder.Entity("Crm.Entities.ScreenDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ScreenCode")
+                        .IsRequired();
+
+                    b.Property<string>("ScreenName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ScreenDetail");
+                });
+
+            modelBuilder.Entity("Crm.Entities.UserScreenAccess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("CanAccess");
+
+                    b.Property<int>("ScreenId");
+
+                    b.Property<Guid>("UserRoleId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserScreenAccess");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

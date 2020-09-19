@@ -33,6 +33,7 @@ namespace Crm.Config
             services.AddScoped<IQualifyQuestionManager, QualifyQuestionManager>();
             services.AddScoped<ILeadManager, LeadManager>();
             services.AddScoped<IActivitiesManager, ActivitiesManager>();
+            services.AddScoped<IUserAccessMAnager, UserAccessManager>();
 
         }
         public static void ConfigureRepository(IServiceCollection services)
@@ -42,6 +43,7 @@ namespace Crm.Config
             services.AddScoped<IQualifyQuestionRepository, QualifyQuestionRepository>();
             services.AddScoped<ILeadRepository, LeadRepository>();
             services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
+            services.AddScoped<IUserAccessRepository, UserAccessRepository>();
 
 
         }

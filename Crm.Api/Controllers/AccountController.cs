@@ -100,7 +100,8 @@ namespace Crm.Api.Controllers
                 return BadRequest("Your account is inactive.");
             }
             var roles = await _userManager.GetRolesAsync(user);
-
+            string val = user.Role;
+            var rolesId = await _roleManager.FindByNameAsync(val);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Jwt:secret"));
             var tokenDescription = new SecurityTokenDescriptor
@@ -109,7 +110,8 @@ namespace Crm.Api.Controllers
                     new Claim(ClaimTypes.NameIdentifier , user.Id),
                     new Claim(ClaimTypes.Name , user.UserName),
                     new Claim(ClaimTypes.GivenName , user.FirstName + " " + user.LastName),
-                    new Claim(ClaimTypes.Role , string.Join(",",roles))
+                    new Claim(ClaimTypes.Role , string.Join(",",roles)),
+                    new Claim(ClaimTypes.UserData, string.Join(",",rolesId.Id))
                 }),
                 Audience = _configuration.GetValue<string>("Jwt:Audience"),
                 Issuer = _configuration.GetValue<string>("Jwt:Issuer"),
@@ -145,7 +147,7 @@ namespace Crm.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+       // [Authorize]
         [Route("get-role-select-item")]
         public async Task<IActionResult> GetRoleSelectItem()
         {

@@ -18,6 +18,8 @@ namespace Crm.DataLayer
         public DbSet<ActivityCall> ActivityCall { get; set; }
         public DbSet<ActivityMeeting> ActivityMeeting { get; set; }
         public DbSet<ActivityNotes> ActivityNotes { get; set; }
+        public DbSet<UserScreenAccess> UserScreenAccess { get; set; }
+        public DbSet<ScreenDetail> ScreenDetail { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +32,8 @@ namespace Crm.DataLayer
             modelBuilder.ApplyConfiguration(new ActivityCallConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityMeetingConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityNotesConfiguration());
+            modelBuilder.ApplyConfiguration(new UserScreenAccessConfiguration());
+            modelBuilder.ApplyConfiguration(new ScreenDetailConfiguration());
 
         }
     }
