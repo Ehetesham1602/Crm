@@ -20,6 +20,8 @@ namespace Crm.DataLayer
         public DbSet<ActivityCall> ActivityCall { get; set; }
         public DbSet<ActivityMeeting> ActivityMeeting { get; set; }
         public DbSet<ActivityNotes> ActivityNotes { get; set; }
+        public DbSet<UserScreenAccess> UserScreenAccess { get; set; }
+        public DbSet<ScreenDetail> ScreenDetail { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -36,6 +38,8 @@ namespace Crm.DataLayer
             modelBuilder.ApplyConfiguration(new ActivityCallConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityMeetingConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityNotesConfiguration());
+            modelBuilder.ApplyConfiguration(new UserScreenAccessConfiguration());
+            modelBuilder.ApplyConfiguration(new ScreenDetailConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
             modelBuilder.ApplyConfiguration(new CityConfiguration());
