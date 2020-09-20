@@ -17,78 +17,78 @@ namespace Crm.Api.Controllers
     [Produces("application/json")]
     [ApiController]
     public class LeadStatusController : ControllerBase
-    { 
-    private readonly ILeadStatusManager _manager;
-    private readonly IHostingEnvironment _environment;
-
-    public LeadStatusController(ILeadStatusManager manager,
-        IHostingEnvironment environment)
     {
-        _manager = manager;
-        _environment = environment;
-    }
+        private readonly ILeadStatusManager _manager;
+        private readonly IHostingEnvironment _environment;
 
-    [HttpPost]
-    [Route("add")]
-    public async Task<IActionResult> Add([FromBody] LeadStatusAddModel model)
-    {
-        if (!ModelState.IsValid)
+        public LeadStatusController(ILeadStatusManager manager,
+            IHostingEnvironment environment)
         {
-            return BadRequest(ModelState.GetErrorList());
+            _manager = manager;
+            _environment = environment;
         }
 
-        try
+        [HttpPost]
+        [Route("add")]
+        public async Task<IActionResult> Add([FromBody] LeadStatusAddModel model)
         {
-            await _manager.AddAsync(model);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorList());
+            }
 
-        return Ok();
-    }
+            try
+            {
+                await _manager.AddAsync(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
-    [HttpPost]
-    [Route("edit")]
-    public async Task<IActionResult> Edit([FromBody] LeadStatusEditModel model)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState.GetErrorList());
-        }
-
-        try
-        {
-            await _manager.EditAsync(model);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
+            return Ok();
         }
 
-        return Ok();
-    }
-
-    [HttpGet]
-    [AllowAnonymous]
-    [Route("get-detail/{id}")]
-    public async Task<IActionResult> GetDetail(int id)
-    {
-        var leadData = await _manager.GetDetailAsync(id);
-        if (leadData == null)
+        [HttpPost]
+        [Route("edit")]
+        public async Task<IActionResult> Edit([FromBody] LeadStatusEditModel model)
         {
-            return NotFound();
-        }
-        return Ok(leadData);
-    }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorList());
+            }
 
-    [HttpPost]
-    [Route("paged-result")]
-    public async Task<IActionResult> PagedResult(JqDataTableRequest model)
-    {
-        return Ok(await _manager.GetPagedResultAsync(model));
-    }
+            try
+            {
+                await _manager.EditAsync(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("get-detail/{id}")]
+        public async Task<IActionResult> GetDetail(int id)
+        {
+            var leadData = await _manager.GetDetailAsync(id);
+            if (leadData == null)
+            {
+                return NotFound();
+            }
+            return Ok(leadData);
+        }
+
+        [HttpPost]
+        [Route("paged-result")]
+        public async Task<IActionResult> PagedResult(JqDataTableRequest model)
+        {
+            return Ok(await _manager.GetPagedResultAsync(model));
+        }
         [HttpPost]
         [Route("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -96,6 +96,12 @@ namespace Crm.Api.Controllers
             await _manager.DeleteAsync(id);
 
             return Ok();
+        }
+        [HttpGet]
+        [Route("get-AllStatus")]
+        public async Task<IActionResult> GetAllStatus()
+        {
+            return Ok(await _manager.GetAllStatus());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Crm.Utilities;
+﻿using AccountErp.Entities;
+using Crm.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,5 +23,11 @@ namespace Crm.Entities
         public LeadStatus LeadStatus { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
+        /*public int? AssignTo { get; set; }
+        public int? PriorityTo { get; set; }*/
+        public string Phone { get; set; }
+
     }
 }

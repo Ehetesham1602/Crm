@@ -56,5 +56,9 @@ namespace Crm.Managers
         {
             return await _leadRepository.GetPagedResultAsync(model);
         }
+        public async Task<List<LeadDto>> GetAllLead()
+        {
+            return await _leadRepository.GetAllLead();
+        }
     }
 }

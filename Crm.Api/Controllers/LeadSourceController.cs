@@ -98,5 +98,11 @@ namespace Crm.Api.Controllers
 
             return Ok();
         }
+        [HttpGet]
+        [Route("get-AllSource")]
+        public async Task<IActionResult> GetAllSource()
+        {
+            return Ok(await _manager.GetAllSource());
+        }
     }
 }

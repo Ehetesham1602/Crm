@@ -20,5 +20,6 @@ namespace Crm.Infrastructure.Repositories
 
         Task<JqDataTableResponse<LeadSourceDetailDto>> GetPagedResultAsync(JqDataTableRequest model);
         Task DeleteAsync(int id);
+        Task<List<LeadSourceDetailDto>> GetAllSource();
     }
 }

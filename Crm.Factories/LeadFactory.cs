@@ -1,8 +1,10 @@
-﻿using Crm.Entities;
+﻿using AccountErp.Entities;
+using Crm.Entities;
 using Crm.Models.Lead;
 using Crm.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Crm.Factories
@@ -17,12 +19,21 @@ namespace Crm.Factories
                 LastName = model.LastName,
                 Email = model.Email,
                 Website = model.Website,
-                Mobile= model.Mobile,
+                Mobile = model.Mobile,
                 LeadSourceId = model.LeadSourceId,
                 LeadStatusId = model.LeadStatusId,
                 Status = Constants.RecordStatus.Active,
+                Phone = model.Phone,
                 CreatedBy = userId ?? "0",
-                CreatedOn = Utility.GetDateTime()
+                CreatedOn = Utility.GetDateTime(),
+                Address =  new Address
+                {
+                    CountryId = model.Address.CountryId,
+                    StateId = model.Address.StateId,
+                    CityId = model.Address.CityId,
+                    PostalCode = model.Address.PostalCode,
+                    StreetName = model.Address.StreetName
+                }
             };
             return lead;
         }
@@ -36,8 +47,23 @@ namespace Crm.Factories
             entity.Mobile = model.Mobile;
             entity.LeadSourceId = model.LeadSourceId;
             entity.LeadStatusId = model.LeadStatusId;
+            entity.Phone = model.Phone;
             entity.UpdatedBy = userId ?? "0";
             entity.UpdatedOn = Utility.GetDateTime();
+            
+            if (!model.Address.Id.HasValue && model.Address.IsAllNullOrEmpty())
+            {
+                return;
+            }
+
+            if (entity.Address != null)
+            {
+                entity.Address.CountryId = model.Address.CountryId;
+                entity.Address.StateId = model.Address.StateId;
+                entity.Address.CityId = model.Address.CityId;
+                entity.Address.PostalCode = model.Address.PostalCode;
+                entity.Address.StreetName = model.Address.StreetName;
+            }
         }
 
     }

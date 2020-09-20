@@ -84,6 +84,21 @@ namespace Crm.DataLayer.Repositories
             data.Status = Constants.RecordStatus.Deleted;
             _dataContext.LeadSource.Update(data);
         }
+        public async Task<List<LeadSourceDetailDto>> GetAllSource()
+        {
+            var linqstmt = await (from l in _dataContext.LeadSource
+                                  where l.Status != Constants.RecordStatus.Deleted 
+                                  select new LeadSourceDetailDto
+                                  {
+                                      Id = l.Id,
+                                      Name = l.Name,
+                                      
+                                  })
+                            .AsNoTracking()
+                            .ToListAsync();
+
+            return linqstmt;
+        }
 
     }
 }

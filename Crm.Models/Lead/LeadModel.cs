@@ -19,9 +19,8 @@ namespace Crm.Models.Lead
         public int LeadSourceId { get; set; }
         public int LeadStatusId { get; set; }
         public Constants.RecordStatus Status { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? UpdatedOn { get; set; }
-        public string UpdatedBy { get; set; }
+        public AddressModel Address { get; set; }
+        public string Phone { get; set; }
+
     }
 }
