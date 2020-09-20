@@ -37,7 +37,9 @@ namespace Crm.DataLayer.Repositories
                               Id = s.Id,
                               ScreenId = s.ScreenId,
                               UserRoleId = s.UserRoleId,
-                              CanAccess = s.CanAccess
+                              CanAccess = s.CanAccess,
+                              ScreenName = s.Screen.ScreenName
+                              
                           })
                          .AsNoTracking()
                          .ToListAsync();

@@ -10,5 +10,6 @@ namespace Crm.Entities
         public Guid UserRoleId { get; set; }
         public int ScreenId { get; set; }
         public bool CanAccess { get; set; }
+        public ScreenDetail Screen { get; set; }
     }
 }

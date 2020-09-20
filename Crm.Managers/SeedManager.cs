@@ -94,7 +94,8 @@ namespace Crm.Managers
                 {
                     FirstName = "Administrator",
                     UserName = "admin",
-                    Email = "admin@maplenet.com",
+                    Email = "admin@maplenet.com", 
+                    Role = "Administrator",
                     EmailConfirmed = true
                 };
 
@@ -117,7 +118,7 @@ namespace Crm.Managers
 
                 _logger.LogError("Administrator seed failed");
                 _logger.LogError(string.Join(",", result.Errors.Select(x => x.Description)));
-
+                 
                 await _userManager.DeleteAsync(user);
             }
             catch (Exception ex)
