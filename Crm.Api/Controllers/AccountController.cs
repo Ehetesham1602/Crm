@@ -121,7 +121,8 @@ namespace Crm.Api.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescription);
 
-            return Ok(tokenHandler.WriteToken(token));
+            //  return Ok(tokenHandler.WriteToken(token));
+            return Ok(rolesId);
         }
 
         [HttpPost]
