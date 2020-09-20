@@ -90,5 +90,11 @@ namespace Crm.Api.Controllers
             return Ok(lead);
 
         }
+        [HttpGet]
+        [Route("get-AllLead")]
+        public async Task<IActionResult> GetAllLead()
+        {
+            return Ok(await _leadManager.GetAllLead());
+        }
     }
 }

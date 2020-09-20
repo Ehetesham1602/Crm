@@ -59,5 +59,9 @@ namespace Crm.Managers
             await _repository.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
         }
+        public async Task<List<LeadSourceDetailDto>> GetAllSource()
+        {
+            return await _repository.GetAllSource();
+        }
     }
 }

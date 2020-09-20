@@ -1,4 +1,5 @@
-﻿using Crm.Dtos.Lead;
+﻿using AccountErp.Dtos.Address;
+using Crm.Dtos.Lead;
 using Crm.Dtos.LeadSource;
 using Crm.Dtos.LeadStatus;
 using Crm.Entities;
@@ -63,7 +64,17 @@ namespace Crm.DataLayer.Repositories
                                 Mobile = l.Mobile,
                                 LeadSourceId = l.LeadSourceId,
                                 LeadStatusId = l.LeadStatusId,
-                                Status = l.Status
+                                Status = l.Status,
+                                Phone = l.Phone,
+                                Address = new AddressDto
+                                {
+                                    CountryName = l.Address.Country.CountryName,
+                                    StateName = l.Address.State.StateName,
+                                    CityName = l.Address.City.CityName,
+                                    StreetName = l.Address.StreetName,
+                                    PostalCode = l.Address.PostalCode
+
+                                }
                             })
                            .AsNoTracking();
 
@@ -93,19 +104,71 @@ namespace Crm.DataLayer.Repositories
                               LeadSourceId = l.LeadSourceId,
                               LeadStatusId = l.LeadStatusId,
                               Status = l.Status,
+                              Phone = l.Phone,
                               LeadSource = new LeadSourceDetailDto
                               {
                                   Name = l.LeadSource.Name,
                                   Id = l.LeadSource.Id
                               },
-                               LeadStatus = new LeadStatusDetailDto
-                               {
-                                   Name = l.LeadStatus.Name,
-                                   Id = l.LeadStatus.Id
-                               }
+                              LeadStatus = new LeadStatusDetailDto
+                              {
+                                  Name = l.LeadStatus.Name,
+                                  Id = l.LeadStatus.Id
+                              },
+                              Address = new AddressDto
+                              {
+                                  CountryName = l.Address.Country.CountryName,
+                                  StateName = l.Address.State.StateName,
+                                  CityName = l.Address.City.CityName,
+                                  StreetName = l.Address.StreetName,
+                                  PostalCode = l.Address.PostalCode
+
+                              }
                           })
                           .AsNoTracking()
                           .SingleOrDefaultAsync();
+        }
+        public async Task<List<LeadDto>> GetAllLead()
+        {
+            var linqstmt = await (from l in _dataContext.Lead
+                                  where l.Status != Constants.RecordStatus.Deleted
+                                  select new LeadDto
+                                  {
+                                      Id = l.Id,
+                                      FirstName = l.FirstName,
+                                      LastName = l.LastName,
+                                      Email = l.Email,
+                                      Website = l.Website,
+                                      Mobile = l.Mobile,
+                                      LeadSourceId = l.LeadSourceId,
+                                      LeadStatusId = l.LeadStatusId,
+                                      Status = l.Status,
+                                      Phone = l.Phone,
+                                      LeadSource = new LeadSourceDetailDto
+                                      {
+                                          Name = l.LeadSource.Name,
+                                          Id = l.LeadSource.Id
+                                      },
+                                      LeadStatus = new LeadStatusDetailDto
+                                      {
+                                          Name = l.LeadStatus.Name,
+                                          Id = l.LeadStatus.Id
+                                      },
+                                      Address = new AddressDto
+                                      {
+                                          CountryName = l.Address.Country.CountryName,
+                                          StateName = l.Address.State.StateName,
+                                          CityName = l.Address.City.CityName,
+                                          StreetName = l.Address.StreetName,
+                                          PostalCode = l.Address.PostalCode
+
+                                      }
+
+                                  })
+                            .AsNoTracking()
+                            .ToListAsync();
+
+            return linqstmt;
         }
 
 

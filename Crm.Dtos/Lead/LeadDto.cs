@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AccountErp.Dtos.Address;
 using Crm.Dtos.LeadSource;
 using Crm.Dtos.LeadStatus;
 using Crm.Utilities;
@@ -24,5 +25,8 @@ namespace Crm.Dtos.Lead
         public LeadStatusDetailDto LeadStatus { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
+        public AddressDto Address { get; set; }
+        public string Phone { get; set; }
+
     }
 }

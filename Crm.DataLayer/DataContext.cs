@@ -1,4 +1,6 @@
-﻿using Crm.DataLayer;
+﻿using AccountErp.DataLayer.EntityConfigurations;
+using AccountErp.Entities;
+using Crm.DataLayer;
 using Crm.DataLayer.EntityConfigurations;
 using Crm.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,6 +20,10 @@ namespace Crm.DataLayer
         public DbSet<ActivityCall> ActivityCall { get; set; }
         public DbSet<ActivityMeeting> ActivityMeeting { get; set; }
         public DbSet<ActivityNotes> ActivityNotes { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +36,10 @@ namespace Crm.DataLayer
             modelBuilder.ApplyConfiguration(new ActivityCallConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityMeetingConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityNotesConfiguration());
+            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new StateConfiguration());
+            modelBuilder.ApplyConfiguration(new CityConfiguration());
+            modelBuilder.ApplyConfiguration(new AddressConfiguration());
 
         }
     }
