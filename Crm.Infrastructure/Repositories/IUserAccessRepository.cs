@@ -12,5 +12,6 @@ namespace Crm.Infrastructure.Repositories
         Task AddUserScreenAccessAsync(List<UserScreenAccess> entity);
         Task<List<ScreenAccessDto>> GetAsyncUserScreenAccess(Guid id);
         Task DeleteAsyncUserScreenAccess(Guid id);
+        Task<List<ScreendetailDto>> GetAllScreenDetail();
     }
 }

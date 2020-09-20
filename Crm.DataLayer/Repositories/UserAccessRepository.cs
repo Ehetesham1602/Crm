@@ -52,6 +52,19 @@ namespace Crm.DataLayer.Repositories
             }
 
         }
+        public async Task<List<ScreendetailDto>> GetAllScreenDetail()
+        {
+            return await (from s in _dataContext.ScreenDetail
+                          select new ScreendetailDto
+                          {
+                              Id = s.Id,
+                              ScreenCode = s.ScreenCode,
+                              ScreenName = s.ScreenName
+                          })
+                         .AsNoTracking()
+                         .ToListAsync();
+        }
+
 
     }
 }

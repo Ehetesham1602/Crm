@@ -49,5 +49,11 @@ namespace Crm.Api.Controllers
         {
             return Ok(await _manager.GetUserScreenAccessById(id));
         }
+        [HttpGet]
+        [Route("getAllScreens")]
+        public async Task<IActionResult> GetAllScreenDetail()
+        {
+            return Ok(await _manager.GetAllScreenDetail());
+        }
     }
 }

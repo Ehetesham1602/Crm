@@ -45,5 +45,9 @@ namespace Crm.Managers
         {
             return await _repository.GetAsyncUserScreenAccess(id);
         }
+        public async Task<List<ScreendetailDto>> GetAllScreenDetail()
+        {
+            return await _repository.GetAllScreenDetail();
+        }
     }
 }
