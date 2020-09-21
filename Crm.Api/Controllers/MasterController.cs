@@ -19,10 +19,10 @@ namespace Crm.Api.Controllers
         }
 
         [HttpGet]
-        [Route("get-country")]
-        public async Task<IActionResult> GetCountry()
+        [Route("get-countryDetails")]
+        public async Task<IActionResult> GetCountryDetails()
         {
-            var countries = await _masterManager.GetCountrySelectItemsAsync();
+            var countries = await _masterManager.GetCountryDetails();
             if (countries == null)
             {
                 BadRequest("unable to fatch countries");

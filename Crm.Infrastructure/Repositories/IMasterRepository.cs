@@ -8,7 +8,9 @@ namespace Crm.Infrastructure.Repositories
 {
     public interface IMasterRepository
     {
-        Task<IEnumerable<SelectMasterListDto>> GetCountrySelectItemsAsync();
+        //Task<IEnumerable<CountryDto>> GetCountrySelectItemsAsync();
+
+        Task<List<CountryDto>> GetCountryDetails();
         Task<List<StateDto>> GetDetailAsync(int id);
         Task<List<CityDto>> GetCityDetails(int id);
     }

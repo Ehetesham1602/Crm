@@ -22,9 +22,9 @@ namespace Crm.Managers
             _masterRepository = repository;
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<SelectMasterListDto>> GetCountrySelectItemsAsync()
+        public async Task<List<CountryDto>> GetCountryDetails()
         {
-            return await _masterRepository.GetCountrySelectItemsAsync();
+            return await _masterRepository.GetCountryDetails();
         }
         public async Task<List<StateDto>> GetDetailAsync(int id)
         {

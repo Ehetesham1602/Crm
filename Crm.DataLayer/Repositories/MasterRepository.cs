@@ -18,17 +18,28 @@ namespace Crm.DataLayer.Repositories
         {
             _dataContext = dataContext;
         }
-        public async Task<IEnumerable<SelectMasterListDto>> GetCountrySelectItemsAsync()
+        /*public async Task<IEnumerable<CountryDto>> GetCountrySelectItemsAsync()
         {
             return await _dataContext.Countries
                 .AsNoTracking()
                 .Where(x => x.Id != 0)
                 .OrderBy(x => x.CountryName)
-                .Select(x => new SelectMasterListDto
+                .Select(x => new CountryDto
                 {
                     KeyInt = x.Id,
                     Value = x.CountryName
                 }).ToListAsync();
+        }*/
+        public async Task<List<CountryDto>> GetCountryDetails()
+        {
+            return await (from c in _dataContext.Countries
+                          select new CountryDto
+                          {
+                              Id = c.Id,
+                              CountryName = c.CountryName
+                              
+                          })
+                      .AsNoTracking().ToListAsync();
         }
         public async Task<List<StateDto>>GetDetailAsync(int id)
         {
