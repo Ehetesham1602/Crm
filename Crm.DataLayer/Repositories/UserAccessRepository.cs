@@ -42,6 +42,7 @@ namespace Crm.DataLayer.Repositories
                               
                           })
                          .AsNoTracking()
+                         .OrderBy("ScreenName Asc")
                          .ToListAsync();
         }
 

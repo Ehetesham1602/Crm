@@ -255,5 +255,31 @@ namespace Crm.Api.Controllers
             await _userManager.UpdateAsync(user);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("add-User")]
+        public async Task<IActionResult> AddUser(String userName)
+        {
+
+            IdentityResult identityResult;
+            try
+            {
+                if (!await _roleManager.Roles.AnyAsync(x => x.Name.Equals(userName)))
+                {
+                    identityResult = await _roleManager.CreateAsync(new IdentityRole(userName));
+                    //_logger.LogInformation($"Role ({Constants.UserType.Admin}) seed result: {identityResult}");
+                    return Ok(identityResult);
+                }
+                else
+                {
+                    return BadRequest("Invalid Credential");
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid Credential");
+            }
+
+        }
     }
 }
