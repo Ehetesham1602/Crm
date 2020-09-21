@@ -10,5 +10,6 @@ namespace Crm.Dtos.UserAccess
         public Guid UserRoleId { get; set; }
         public int ScreenId { get; set; }
         public bool CanAccess { get; set; }
+        public string ScreenName { get; set; }
     }
 }
