@@ -68,6 +68,7 @@ namespace Crm.DataLayer.Repositories
                                 Phone = l.Phone,
                                 Address = new AddressDto
                                 {
+                                   
                                     CountryName = l.Address.Country.CountryName,
                                     StateName = l.Address.State.StateName,
                                     CityName = l.Address.City.CityName,
@@ -117,8 +118,11 @@ namespace Crm.DataLayer.Repositories
                               },
                               Address = new AddressDto
                               {
+                                  CountryId = l.Address.Country.Id,
                                   CountryName = l.Address.Country.CountryName,
+                                  StateId = l.Address.State.Id,
                                   StateName = l.Address.State.StateName,
+                                  CityId = l.Address.City.Id,
                                   CityName = l.Address.City.CityName,
                                   StreetName = l.Address.StreetName,
                                   PostalCode = l.Address.PostalCode
@@ -156,8 +160,11 @@ namespace Crm.DataLayer.Repositories
                                       },
                                       Address = new AddressDto
                                       {
+                                          CountryId = l.Address.Country.Id,
                                           CountryName = l.Address.Country.CountryName,
+                                          StateId = l.Address.State.Id,
                                           StateName = l.Address.State.StateName,
+                                          CityId = l.Address.City.Id,
                                           CityName = l.Address.City.CityName,
                                           StreetName = l.Address.StreetName,
                                           PostalCode = l.Address.PostalCode

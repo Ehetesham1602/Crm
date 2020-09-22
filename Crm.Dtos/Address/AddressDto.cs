@@ -4,6 +4,8 @@
     {
         public int? Id { get; set; }
         public int? CountryId { get; set; }
+        public int? StateId { get; set; }
+        public int? CityId { get; set; }
         public string CountryName { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
