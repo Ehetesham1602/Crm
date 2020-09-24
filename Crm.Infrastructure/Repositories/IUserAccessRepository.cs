@@ -10,8 +10,8 @@ namespace Crm.Infrastructure.Repositories
     public interface IUserAccessRepository
     {
         Task AddUserScreenAccessAsync(List<UserScreenAccess> entity);
-        Task<List<ScreenAccessDto>> GetAsyncUserScreenAccess(Guid id);
-        Task DeleteAsyncUserScreenAccess(Guid id);
+        Task<List<ScreenAccessDto>> GetAsyncUserScreenAccess(int id);
+        Task DeleteAsyncUserScreenAccess(int id);
         Task<List<ScreendetailDto>> GetAllScreenDetail();
     }
 }

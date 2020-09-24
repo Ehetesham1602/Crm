@@ -35,6 +35,8 @@ namespace Crm.Config
             services.AddScoped<IActivitiesManager, ActivitiesManager>();
             services.AddScoped<IUserAccessMAnager, UserAccessManager>();
             services.AddScoped<IMasterManager, MasterManager>();
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IUserRoleManager, UserRoleManager>();
 
         }
         public static void ConfigureRepository(IServiceCollection services)
@@ -46,7 +48,8 @@ namespace Crm.Config
             services.AddScoped<IActivitiesRepository, ActivitiesRepository>();
             services.AddScoped<IUserAccessRepository, UserAccessRepository>();
             services.AddScoped<IMasterRepository, MasterRepository>();
-
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
         }
         public static void ConfigureServices(IServiceCollection services)

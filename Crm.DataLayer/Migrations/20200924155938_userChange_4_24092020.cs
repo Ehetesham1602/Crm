@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Crm.DataLayer.Migrations
 {
-    public partial class useraccessChange20092020 : Migration
+    public partial class userChange_4_24092020 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -117,6 +117,20 @@ namespace Crm.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CountryName = table.Column<string>(nullable: false),
+                    CountryCode = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Country", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LeadSource",
                 columns: table => new
                 {
@@ -196,18 +210,21 @@ namespace Crm.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserScreenAccess",
+                name: "UserRoles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserRoleId = table.Column<Guid>(nullable: false),
-                    ScreenId = table.Column<int>(nullable: false),
-                    CanAccess = table.Column<bool>(nullable: false)
+                    RoleName = table.Column<string>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 40, nullable: false),
+                    UpdatedOn = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserScreenAccess", x => x.Id);
+                    table.PrimaryKey("PK_UserRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -317,6 +334,133 @@ namespace Crm.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "State",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    StateName = table.Column<string>(nullable: false),
+                    CountryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_State", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_State_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserScreenAccess",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserRoleId = table.Column<int>(nullable: false),
+                    ScreenId = table.Column<int>(nullable: false),
+                    CanAccess = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserScreenAccess", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserScreenAccess_ScreenDetail_ScreenId",
+                        column: x => x.ScreenId,
+                        principalTable: "ScreenDetail",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    Mobile = table.Column<string>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 40, nullable: false),
+                    UpdatedOn = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 40, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_UserRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "UserRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "City",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CityName = table.Column<string>(nullable: false),
+                    StateId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_City_State_StateId",
+                        column: x => x.StateId,
+                        principalTable: "State",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CountryId = table.Column<int>(nullable: true),
+                    StreetNumber = table.Column<string>(maxLength: 50, nullable: true),
+                    StreetName = table.Column<string>(maxLength: 100, nullable: true),
+                    CityId = table.Column<int>(nullable: true),
+                    StateId = table.Column<int>(nullable: true),
+                    PostalCode = table.Column<string>(maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_City_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Addresses_State_StateId",
+                        column: x => x.StateId,
+                        principalTable: "State",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lead",
                 columns: table => new
                 {
@@ -333,11 +477,19 @@ namespace Crm.DataLayer.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     CreatedBy = table.Column<string>(maxLength: 40, nullable: false),
                     UpdatedOn = table.Column<DateTime>(nullable: true),
-                    UpdatedBy = table.Column<string>(nullable: true)
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    AddressId = table.Column<int>(nullable: false),
+                    Phone = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lead", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lead_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Lead_LeadSource_LeadSourceId",
                         column: x => x.LeadSourceId,
@@ -351,6 +503,21 @@ namespace Crm.DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_CityId",
+                table: "Addresses",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_CountryId",
+                table: "Addresses",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_StateId",
+                table: "Addresses",
+                column: "StateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -392,6 +559,16 @@ namespace Crm.DataLayer.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_City_StateId",
+                table: "City",
+                column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lead_AddressId",
+                table: "Lead",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Lead_LeadSourceId",
                 table: "Lead",
                 column: "LeadSourceId");
@@ -400,6 +577,21 @@ namespace Crm.DataLayer.Migrations
                 name: "IX_Lead_LeadStatusId",
                 table: "Lead",
                 column: "LeadStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_State_CountryId",
+                table: "State",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserScreenAccess_ScreenId",
+                table: "UserScreenAccess",
+                column: "ScreenId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -438,7 +630,7 @@ namespace Crm.DataLayer.Migrations
                 name: "QualifyQuestionAnswer");
 
             migrationBuilder.DropTable(
-                name: "ScreenDetail");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "UserScreenAccess");
@@ -450,10 +642,28 @@ namespace Crm.DataLayer.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Addresses");
+
+            migrationBuilder.DropTable(
                 name: "LeadSource");
 
             migrationBuilder.DropTable(
                 name: "LeadStatus");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "ScreenDetail");
+
+            migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
+                name: "State");
+
+            migrationBuilder.DropTable(
+                name: "Country");
         }
     }
 }

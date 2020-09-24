@@ -28,7 +28,7 @@ namespace Crm.DataLayer.Repositories
 
         }
 
-        public async Task<List<ScreenAccessDto>> GetAsyncUserScreenAccess(Guid id)
+        public async Task<List<ScreenAccessDto>> GetAsyncUserScreenAccess(int id)
         {
             return await (from s in _dataContext.UserScreenAccess
                           where s.UserRoleId == id
@@ -46,7 +46,7 @@ namespace Crm.DataLayer.Repositories
                          .ToListAsync();
         }
 
-        public async Task DeleteAsyncUserScreenAccess(Guid id)
+        public async Task DeleteAsyncUserScreenAccess(int id)
         {
             var data = await _dataContext.UserScreenAccess.Where(x => x.UserRoleId == id).ToListAsync();
             foreach (var item in data)

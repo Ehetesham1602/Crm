@@ -432,6 +432,79 @@ namespace Crm.DataLayer.Migrations
                     b.ToTable("State");
                 });
 
+            modelBuilder.Entity("Crm.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Mobile")
+                        .IsRequired();
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime?>("UpdatedOn");
+
+                    b.Property<string>("UserName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Crm.Entities.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired();
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime?>("UpdatedOn");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRoles");
+                });
+
             modelBuilder.Entity("Crm.Entities.UserScreenAccess", b =>
                 {
                     b.Property<int>("Id")
@@ -442,7 +515,7 @@ namespace Crm.DataLayer.Migrations
 
                     b.Property<int>("ScreenId");
 
-                    b.Property<Guid>("UserRoleId");
+                    b.Property<int>("UserRoleId");
 
                     b.HasKey("Id");
 
@@ -607,6 +680,14 @@ namespace Crm.DataLayer.Migrations
                     b.HasOne("Crm.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Crm.Entities.User", b =>
+                {
+                    b.HasOne("Crm.Entities.UserRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

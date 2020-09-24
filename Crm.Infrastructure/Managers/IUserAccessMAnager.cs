@@ -10,7 +10,7 @@ namespace Crm.Infrastructure.Managers
     public interface IUserAccessMAnager
     {
         Task AddUserScreenAccessAsync(List<ScreenAccessModel> model);
-        Task<List<ScreenAccessDto>> GetUserScreenAccessById(Guid id);
+        Task<List<ScreenAccessDto>> GetUserScreenAccessById(int id);
         Task<List<ScreendetailDto>> GetAllScreenDetail();
     }
 }

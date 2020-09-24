@@ -41,7 +41,7 @@ namespace Crm.Managers
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<List<ScreenAccessDto>> GetUserScreenAccessById(Guid id)
+        public async Task<List<ScreenAccessDto>> GetUserScreenAccessById(int id)
         {
             return await _repository.GetAsyncUserScreenAccess(id);
         }

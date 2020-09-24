@@ -53,6 +53,7 @@ namespace Crm.DataLayer.Repositories
                               CountryId = s.CountryId
                           })
                       .AsNoTracking().ToListAsync();
+
         }
         public async Task<List<CityDto>> GetCityDetails(int id)
         {

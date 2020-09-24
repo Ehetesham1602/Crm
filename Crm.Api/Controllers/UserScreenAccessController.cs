@@ -45,7 +45,7 @@ namespace Crm.Api.Controllers
 
         [HttpGet]
         [Route("getScreenAccessByUserRoleIdId/{id}")]
-        public async Task<IActionResult> GetQualifyAnser(Guid id)
+        public async Task<IActionResult> GetQualifyAnser(int id)
         {
             return Ok(await _manager.GetUserScreenAccessById(id));
         }

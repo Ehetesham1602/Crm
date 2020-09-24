@@ -26,6 +26,8 @@ namespace Crm.DataLayer
         public DbSet<State> States { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserRole> UsersRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +46,8 @@ namespace Crm.DataLayer
             modelBuilder.ApplyConfiguration(new StateConfiguration());
             modelBuilder.ApplyConfiguration(new CityConfiguration());
             modelBuilder.ApplyConfiguration(new AddressConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
 
         }
     }
