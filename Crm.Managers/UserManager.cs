@@ -67,5 +67,9 @@ namespace Crm.Managers
         {
             return await _repository.Login(model);
         }
+        public async Task<JqDataTableResponse<UserDetailDto>> GetAgentPagedResultAsync(JqDataTableRequest model)
+        {
+            return await _repository.GetAgentPagedResultAsync(model);
+        }
     }
 }

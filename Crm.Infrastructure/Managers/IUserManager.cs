@@ -20,5 +20,6 @@ namespace Crm.Infrastructure.Managers
         Task DeleteAsync(int id);
         Task<UserDetailDto> CheckUser(string username);
         Task<UserDetailDto> Login(UserLoginModel model);
+        Task<JqDataTableResponse<UserDetailDto>> GetAgentPagedResultAsync(JqDataTableRequest model);
     }
 }

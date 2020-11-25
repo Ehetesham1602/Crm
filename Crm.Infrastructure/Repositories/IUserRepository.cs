@@ -24,5 +24,7 @@ namespace Crm.Infrastructure.Repositories
         Task DeleteAsync(int id);
         Task<UserDetailDto> GetByUserAsync(string username);
         Task<UserDetailDto> Login(UserLoginModel model);
+        Task<JqDataTableResponse<UserDetailDto>> GetAgentPagedResultAsync(JqDataTableRequest model);
+
     }
 }

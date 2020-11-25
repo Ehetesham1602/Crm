@@ -130,5 +130,11 @@ namespace Crm.Api.Controllers
             
         }
 
+        [HttpPost]
+        [Route("agent-paged-result")]
+        public async Task<IActionResult> AgentPagedResult(JqDataTableRequest model)
+        {
+            return Ok(await _manager.GetAgentPagedResultAsync(model));
+        }
     }
 }

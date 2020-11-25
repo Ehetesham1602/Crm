@@ -138,5 +138,40 @@ namespace Crm.DataLayer.Repositories
                          .AsNoTracking()
                          .SingleOrDefaultAsync();
         }
+        public async Task<JqDataTableResponse<UserDetailDto>> GetAgentPagedResultAsync(JqDataTableRequest model)
+        {
+            if (model.Length == 0)
+            {
+                model.Length = Constants.DefaultPageSize;
+            }
+
+            var filterKey = model.Search.Value;
+
+            var linqStmt = (from s in _dataContext.User
+                            where s.RoleId == 4 && s.Status != Constants.RecordStatus.Deleted && (filterKey == null || EF.Functions.Like(s.FirstName, "%" + filterKey + "%"))
+                            select new UserDetailDto
+                            {
+                                Id = s.Id,
+                                FirstName = s.FirstName,
+                                LastName = s.LastName,
+                                UserName = s.UserName,
+                                Password = s.Password,
+                                Mobile = s.Mobile,
+                                Email = s.Email,
+                                RoleId = s.RoleId,
+                                RoleName = s.Role.RoleName
+                            })
+                            .AsNoTracking();
+
+            var sortExpresstion = model.GetSortExpression();
+
+            var pagedResult = new JqDataTableResponse<UserDetailDto>
+            {
+                RecordsTotal = await _dataContext.User.CountAsync(x => x.Status != Constants.RecordStatus.Deleted),
+                RecordsFiltered = await linqStmt.CountAsync(),
+                Data = await linqStmt.OrderBy(sortExpresstion).Skip(model.Start).Take(model.Length).ToListAsync()
+            };
+            return pagedResult;
+        }
     }
 }
