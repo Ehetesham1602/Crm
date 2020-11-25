@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Crm.Factories
 {
@@ -66,5 +67,21 @@ namespace Crm.Factories
             }
         }
 
+        public static Lead CreateLead(LeadModels model, string userId)
+        {
+            var lead = new Lead
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Website = model.Website,
+                Mobile = model.Mobile,
+                Status = Constants.RecordStatus.Active,
+                Phone = model.Phone,
+                CreatedBy = userId ?? "0",
+                CreatedOn = Utility.GetDateTime()
+            };
+            return lead;
+        }
     }
 }

@@ -8,7 +8,10 @@ using Crm.Models.Lead;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Crm.Utilities;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.IO;
 namespace Crm.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -96,5 +99,25 @@ namespace Crm.Api.Controllers
         {
             return Ok(await _leadManager.GetAllLead());
         }
+        [HttpPost]
+        [Route("add_lead")]
+        public async Task<IActionResult> AddLead([FromBody] List<LeadModels> model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorList());
+            }
+            try
+            {
+                await _leadManager.AddLeadAsync(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
+
     }
 }

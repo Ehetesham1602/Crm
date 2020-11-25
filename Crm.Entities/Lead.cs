@@ -14,8 +14,8 @@ namespace Crm.Entities
         public string Email { get; set; }
         public string Website { get; set; }
         public string Mobile { get; set; }
-        public int LeadSourceId { get; set; }
-        public int LeadStatusId { get; set; }
+        public int? LeadSourceId { get; set; }
+        public int? LeadStatusId { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
@@ -23,10 +23,8 @@ namespace Crm.Entities
         public LeadStatus LeadStatus { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public Address Address { get; set; }
-        /*public int? AssignTo { get; set; }
-        public int? PriorityTo { get; set; }*/
         public string Phone { get; set; }
 
     }

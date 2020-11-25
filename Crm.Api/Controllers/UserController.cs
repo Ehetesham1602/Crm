@@ -112,7 +112,7 @@ namespace Crm.Api.Controllers
             var data = await _manager.CheckUser(model.UserName);
             if(data != null)
             {
-                if (model.Password != Utility.Decrypt(data.Password))
+                if (Utility.Decrypt(data.Password,model.Password)==false)
                 {
                     return BadRequest("Invalid Password");
                 }

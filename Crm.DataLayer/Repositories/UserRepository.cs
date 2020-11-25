@@ -47,7 +47,7 @@ namespace Crm.DataLayer.Repositories
                               FirstName = s.FirstName,
                               LastName = s.LastName,
                               UserName = s.UserName,
-                              Password =Utility.Decrypt(s.Password),
+                              Password =s.Password,
                               Mobile = s.Mobile,
                               Email = s.Email,
                               RoleId = s.RoleId,

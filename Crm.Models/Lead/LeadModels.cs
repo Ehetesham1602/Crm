@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Crm.Models.Lead
 {
-    public class LeadModel
+    public class LeadModels
     {
         [Required]
         public int Id { get; set; }
@@ -16,10 +16,7 @@ namespace Crm.Models.Lead
         public string Email { get; set; }
         public string Website { get; set; }
         public string Mobile { get; set; }
-        public int? LeadSourceId { get; set; }
-        public int? LeadStatusId { get; set; }
         public Constants.RecordStatus Status { get; set; }
-        public AddressModel Address { get; set; }
         public string Phone { get; set; }
 
     }

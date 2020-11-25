@@ -14,6 +14,7 @@ using System.Text;
 using IRecurringJobManager = Hangfire.IRecurringJobManager;
 using Crm.Config;
 using Crm.DataLayer;
+using Microsoft.Extensions.Azure;
 
 namespace Crm.Api
 {
@@ -95,6 +96,11 @@ namespace Crm.Api
             );
 
             services.AddHangfireServer();
+
+            services.AddAzureClients(builder =>
+            {
+                builder.AddBlobServiceClient(Configuration["ConnectionStrings:DataConnection1"]);
+            });
 
             //services.AddScoped<IRecurringJob, RecurringJob>();
         }

@@ -62,8 +62,8 @@ namespace Crm.DataLayer.Repositories
                                 Email = l.Email,
                                 Website = l.Website,
                                 Mobile = l.Mobile,
-                                LeadSourceId = l.LeadSourceId,
-                                LeadStatusId = l.LeadStatusId,
+                                LeadSourceId = l.LeadSourceId ?? 0,
+                                LeadStatusId = l.LeadStatusId ?? 0,
                                 Status = l.Status,
                                 Phone = l.Phone,
                                 Address = new AddressDto
@@ -102,8 +102,8 @@ namespace Crm.DataLayer.Repositories
                               Email = l.Email,
                               Website = l.Website,
                               Mobile = l.Mobile,
-                              LeadSourceId = l.LeadSourceId,
-                              LeadStatusId = l.LeadStatusId,
+                              LeadSourceId = l.LeadSourceId ?? 0,
+                              LeadStatusId = l.LeadStatusId ?? 0,
                               Status = l.Status,
                               Phone = l.Phone,
                               LeadSource = new LeadSourceDetailDto
@@ -145,8 +145,8 @@ namespace Crm.DataLayer.Repositories
                                       Email = l.Email,
                                       Website = l.Website,
                                       Mobile = l.Mobile,
-                                      LeadSourceId = l.LeadSourceId,
-                                      LeadStatusId = l.LeadStatusId,
+                                      LeadSourceId = l.LeadSourceId ?? 0,
+                                      LeadStatusId = l.LeadStatusId ?? 0,
                                       Status = l.Status,
                                       Phone = l.Phone,
                                       LeadSource = new LeadSourceDetailDto

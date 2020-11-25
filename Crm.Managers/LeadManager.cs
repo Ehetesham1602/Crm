@@ -8,6 +8,8 @@ using Crm.Utilities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +61,19 @@ namespace Crm.Managers
         public async Task<List<LeadDto>> GetAllLead()
         {
             return await _leadRepository.GetAllLead();
+        }
+        public async Task AddLeadAsync(List<LeadModels> model)
+        {
+            LeadModels lead = new LeadModels();
+            List<LeadModels> distinct = model.GroupBy(x => new { x.FirstName, x.LastName, x.Email, x.Mobile })
+                                        .Select(x => x.First())
+                                        .ToList();
+            foreach (var addLead in distinct)
+            {
+                var leadfact = LeadFactory.CreateLead(addLead, _userId);
+                await _leadRepository.AddAsync(leadfact);
+            }
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Crm.Factories
             entity.UserName = model.UserName;
             entity.Email = model.Email;
             entity.RoleId = model.RoleId;
-            entity.Password = Utility.Encrypt(model.Password);
+          //  entity.Password = Utility.Encrypt(model.Password);
             entity.Mobile = model.Mobile;
             entity.UpdatedBy = userId ?? "0";
             entity.UpdatedOn = Utility.GetDateTime();
