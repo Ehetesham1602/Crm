@@ -67,7 +67,8 @@ namespace Crm.DataLayer.Repositories
             var filterKey = model.Search.Value;
 
             var linqStmt = (from s in _dataContext.User
-                            where s.Status != Constants.RecordStatus.Deleted && (filterKey == null || EF.Functions.Like(s.FirstName, "%" + filterKey + "%"))
+                            where s.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(s.FirstName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(s.LastName, "%" + model.filterKey + "%"))
                             select new UserDetailDto
                             {
                                 Id = s.Id,
@@ -148,7 +149,8 @@ namespace Crm.DataLayer.Repositories
             var filterKey = model.Search.Value;
 
             var linqStmt = (from s in _dataContext.User
-                            where s.Role.RoleName == "Agent"  && s.Status != Constants.RecordStatus.Deleted && (filterKey == null || EF.Functions.Like(s.FirstName, "%" + filterKey + "%"))
+                            where s.Role.RoleName == "Agent"  && s.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(s.FirstName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(s.LastName, "%" + model.filterKey + "%"))
                             select new UserDetailDto
                             {
                                 Id = s.Id,

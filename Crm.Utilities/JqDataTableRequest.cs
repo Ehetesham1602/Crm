@@ -11,6 +11,8 @@ namespace Crm.Utilities
 
         public int Length { get; set; }
 
+        public string filterKey { get; set; }
+
         public JqDataTableSearch Search { get; set; }
 
         public List<JqDataTableSort> Order { get; set; }
