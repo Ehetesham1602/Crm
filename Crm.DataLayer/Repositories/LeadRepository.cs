@@ -93,7 +93,7 @@ namespace Crm.DataLayer.Repositories
         public async Task<LeadDto> GetDetailAsync(int id)
         {
             return await (from l in _dataContext.Lead
-                          where l.Id == id
+                          where l.Id == id && l.Status != Constants.RecordStatus.Deleted
                           select new LeadDto
                           {
                               Id = l.Id,
@@ -105,8 +105,8 @@ namespace Crm.DataLayer.Repositories
                               LeadSourceId = l.LeadSourceId ?? 0,
                               LeadStatusId = l.LeadStatusId ?? 0,
                               Status = l.Status,
-                              Phone = l.Phone,
-                              LeadSource = new LeadSourceDetailDto
+                              Phone = l.Phone
+                              /*LeadSource = new LeadSourceDetailDto
                               {
                                   Name = l.LeadSource.Name,
                                   Id = l.LeadSource.Id
@@ -128,7 +128,7 @@ namespace Crm.DataLayer.Repositories
                                   StreetName = l.Address.StreetName,
                                   PostalCode = l.Address.PostalCode
 
-                              }
+                              }*/
                           })
                           .AsNoTracking()
                           .SingleOrDefaultAsync();
@@ -149,7 +149,7 @@ namespace Crm.DataLayer.Repositories
                                       LeadStatusId = l.LeadStatusId ?? 0,
                                       Status = l.Status,
                                       Phone = l.Phone,
-                                      LeadSource = new LeadSourceDetailDto
+                                      /*LeadSource = new LeadSourceDetailDto
                                       {
                                           Name = l.LeadSource.Name,
                                           Id = l.LeadSource.Id
@@ -171,7 +171,7 @@ namespace Crm.DataLayer.Repositories
                                           StreetName = l.Address.StreetName,
                                           PostalCode = l.Address.PostalCode
 
-                                      }
+                                      }*/
 
                                   })
                             .AsNoTracking()

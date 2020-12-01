@@ -16,8 +16,8 @@ namespace Crm.Dtos.Lead
         public string Email { get; set; }
         public string Website { get; set; }
         public string Mobile { get; set; }
-        public int LeadSourceId { get; set; }
-        public int LeadStatusId { get; set; }
+        public int? LeadSourceId { get; set; }
+        public int? LeadStatusId { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
