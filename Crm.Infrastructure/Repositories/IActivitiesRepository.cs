@@ -15,20 +15,20 @@ namespace Crm.Infrastructure.Repositories
         void EditCall(ActivityCall entity);
         Task<ActivityCall> GetAsyncCall(int id);
         Task<JqDataTableResponse<ActivityCallDetailDto>> GetPagedResultAsync(JqDataTableRequest model);
-        Task<ActivityCallDetailDto> GetActivityCallAsyncById(ActivityGetModel model);
+        Task<List<ActivityCallDetailDto>> GetActivityCallAsyncById(ActivityGetModel model);
 
 
         Task AddMeetingAsync(ActivityMeeting entity);
         void EditMeeting(ActivityMeeting entity);
         Task<ActivityMeeting> GetAsyncMeeting(int id);
         Task<JqDataTableResponse<ActivityMeetingDetailDto>> GetPagedResultAsyncMeeting(JqDataTableRequest model);
-        Task<ActivityMeetingDetailDto> GetActivityMeetingAsyncById(ActivityGetModel model);
+        Task<List<ActivityMeetingDetailDto>> GetActivityMeetingAsyncById(ActivityGetModel model);
 
         Task AddNoteAsync(ActivityNotes entity);
         void EditNotes(ActivityNotes entity);
         Task<ActivityNotes> GetAsyncNotes(int id);
         Task<JqDataTableResponse<ActivityNoteDto>> GetPagedResultAsyncNotes(JqDataTableRequest model);
-        Task<ActivityNoteDto> GetActivityNoteAsyncById(ActivityGetModel model);
+        Task<List<ActivityNoteDto>> GetActivityNoteAsyncById(ActivityGetModel model);
 
     }
 }

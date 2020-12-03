@@ -12,15 +12,15 @@ namespace Crm.Infrastructure.Managers
     {
         Task AddAsyncCall(ActivityCallModel model);
         Task EditAsync(ActivityCallModel model);
-        Task<ActivityCallDetailDto> GetDetailAsync(ActivityGetModel model);
+        Task<List<ActivityCallDetailDto>> GetDetailAsync(ActivityGetModel model);
         Task<JqDataTableResponse<ActivityCallDetailDto>> GetPagedResultAsync(JqDataTableRequest model);
         Task AddAsyncMeeting(ActivityMeetingModel model);
         Task EditAsyncMeeting(ActivityMeetingModel model);
-        Task<ActivityMeetingDetailDto> GetDetailAsyncMeeting(ActivityGetModel model);
+        Task<List<ActivityMeetingDetailDto>> GetDetailAsyncMeeting(ActivityGetModel model);
         Task<JqDataTableResponse<ActivityMeetingDetailDto>> GetPagedResultAsyncMeeting(JqDataTableRequest model);
         Task AddAsyncNotes(ActivityNoteModel model);
         Task EditAsyncNotes(ActivityNoteModel model);
-        Task<ActivityNoteDto> GetDetailAsyncNotes(ActivityGetModel model);
+        Task<List<ActivityNoteDto>> GetDetailAsyncNotes(ActivityGetModel model);
         Task<JqDataTableResponse<ActivityNoteDto>> GetPagedResultAsyncNotes(JqDataTableRequest model);
     }
 }

@@ -74,7 +74,7 @@ namespace Crm.DataLayer.Repositories
             return pagedResult;
         }
 
-        public async Task<ActivityCallDetailDto> GetActivityCallAsyncById(ActivityGetModel model)
+        public async Task<List<ActivityCallDetailDto>> GetActivityCallAsyncById(ActivityGetModel model)
         {
             return await (from ac in _dataContext.ActivityCall
                           where ac.EntityId == model.EntityId && ac.EntityMasterId == model.EntityMasterId
@@ -92,7 +92,7 @@ namespace Crm.DataLayer.Repositories
                               EntityMasterId = ac.EntityMasterId
                           })
                           .AsNoTracking()
-                          .SingleOrDefaultAsync();
+                          .ToListAsync();
         }
 
         //For Activity Meeting
@@ -147,7 +147,7 @@ namespace Crm.DataLayer.Repositories
             return pagedResult;
         }
 
-        public async Task<ActivityMeetingDetailDto> GetActivityMeetingAsyncById(ActivityGetModel model)
+        public async Task<List<ActivityMeetingDetailDto>> GetActivityMeetingAsyncById(ActivityGetModel model)
         {
             return await (from am in _dataContext.ActivityMeeting
                           where am.EntityId == model.EntityId && am.EntityMasterId == model.EntityMasterId
@@ -164,7 +164,7 @@ namespace Crm.DataLayer.Repositories
                               EntityMasterId = am.EntityMasterId
                           })
                           .AsNoTracking()
-                          .SingleOrDefaultAsync();
+                          .ToListAsync();
         }
 
 
@@ -215,7 +215,7 @@ namespace Crm.DataLayer.Repositories
             return pagedResult;
         }
 
-        public async Task<ActivityNoteDto> GetActivityNoteAsyncById(ActivityGetModel model)
+        public async Task<List<ActivityNoteDto>> GetActivityNoteAsyncById(ActivityGetModel model)
         {
             return await (from an in _dataContext.ActivityNotes
                           where an.EntityId == model.EntityId && an.EntityMasterId == model.EntityMasterId
@@ -228,7 +228,7 @@ namespace Crm.DataLayer.Repositories
                               EntityMasterId = an.EntityMasterId
                           })
                           .AsNoTracking()
-                          .SingleOrDefaultAsync();
+                          .ToListAsync();
         }
     }
 }

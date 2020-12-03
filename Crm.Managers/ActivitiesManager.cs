@@ -43,7 +43,7 @@ namespace Crm.Managers
             _repository.EditCall(call);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task<ActivityCallDetailDto> GetDetailAsync(ActivityGetModel model)
+        public async Task<List<ActivityCallDetailDto>> GetDetailAsync(ActivityGetModel model)
         {
             return await _repository.GetActivityCallAsyncById(model);
         }
@@ -66,7 +66,7 @@ namespace Crm.Managers
             _repository.EditMeeting(meet);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task<ActivityMeetingDetailDto> GetDetailAsyncMeeting(ActivityGetModel model)
+        public async Task<List<ActivityMeetingDetailDto>> GetDetailAsyncMeeting(ActivityGetModel model)
         {
             return await _repository.GetActivityMeetingAsyncById(model);
         }
@@ -89,7 +89,7 @@ namespace Crm.Managers
             _repository.EditNotes(notes);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task<ActivityNoteDto> GetDetailAsyncNotes(ActivityGetModel model)
+        public async Task<List<ActivityNoteDto>> GetDetailAsyncNotes(ActivityGetModel model)
         {
             return await _repository.GetActivityNoteAsyncById(model);
         }
