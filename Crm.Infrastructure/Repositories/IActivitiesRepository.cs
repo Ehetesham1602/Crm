@@ -29,6 +29,10 @@ namespace Crm.Infrastructure.Repositories
         Task<ActivityNotes> GetAsyncNotes(int id);
         Task<JqDataTableResponse<ActivityNoteDto>> GetPagedResultAsyncNotes(JqDataTableRequest model);
         Task<List<ActivityNoteDto>> GetActivityNoteAsyncById(ActivityGetModel model);
-
+        Task AddTaskAsync(ActivityTask entity);
+        Task<ActivityTask> GetAsyncTask(int id);
+        void EditAsyncTask(ActivityTask entity);
+        Task<List<ActivityTaskDetailDto>> GetActivityTaskAsyncById(ActivityGetModel model);
+        Task<JqDataTableResponse<ActivityTaskDetailDto>> GetPagedResultAsyncTask(JqDataTableRequest model);
     }
 }

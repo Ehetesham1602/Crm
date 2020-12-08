@@ -221,6 +221,47 @@ namespace Crm.DataLayer.Migrations
                     b.ToTable("ActivityNotes");
                 });
 
+            modelBuilder.Entity("Crm.Entities.ActivityTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("DescriptionHtml")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<int>("EntityId");
+
+                    b.Property<int>("EntityMasterId");
+
+                    b.Property<DateTime>("TaskDate");
+
+                    b.Property<string>("TaskDescription")
+                        .IsRequired();
+
+                    b.Property<string>("TaskPurpose")
+                        .IsRequired();
+
+                    b.Property<string>("TaskSubject")
+                        .IsRequired();
+
+                    b.Property<string>("TaskTime")
+                        .IsRequired();
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityTask");
+                });
+
             modelBuilder.Entity("Crm.Entities.City", b =>
                 {
                     b.Property<int>("Id")

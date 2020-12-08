@@ -98,5 +98,26 @@ namespace Crm.Managers
         {
             return await _repository.GetPagedResultAsyncNotes(model);
         }
+        public async Task AddAsyncTask(ActivityTaskModel model)
+        {
+            await _repository.AddTaskAsync(ActivitiesFactory.CreateTask(model, _userId));
+            await _unitOfWork.SaveChangesAsync();
+        }
+        public async Task EditAsyncTask(ActivityTaskModel model)
+        {
+            var task = await _repository.GetAsyncTask(model.Id);
+            ActivitiesFactory.CreateTask(model, task, _userId);
+            _repository.EditAsyncTask(task);
+            await _unitOfWork.SaveChangesAsync();
+        }
+        public async Task<List<ActivityTaskDetailDto>> GetTaskDetailAsync(ActivityGetModel model)
+        {
+            return await _repository.GetActivityTaskAsyncById(model);
+        }
+        public async Task<JqDataTableResponse<ActivityTaskDetailDto>> GetPagedResultAsyncTask(JqDataTableRequest model)
+        {
+            return await _repository.GetPagedResultAsyncTask(model);
+        }
+        
     }
 }

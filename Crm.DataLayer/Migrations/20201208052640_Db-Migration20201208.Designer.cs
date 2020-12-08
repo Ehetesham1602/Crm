@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crm.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200924155938_userChange_4_24092020")]
-    partial class userChange_4_24092020
+    [Migration("20201208052640_Db-Migration20201208")]
+    partial class DbMigration20201208
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,6 +223,47 @@ namespace Crm.DataLayer.Migrations
                     b.ToTable("ActivityNotes");
                 });
 
+            modelBuilder.Entity("Crm.Entities.ActivityTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("DescriptionHtml")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.Property<int>("EntityId");
+
+                    b.Property<int>("EntityMasterId");
+
+                    b.Property<DateTime>("TaskDate");
+
+                    b.Property<string>("TaskDescription")
+                        .IsRequired();
+
+                    b.Property<string>("TaskPurpose")
+                        .IsRequired();
+
+                    b.Property<string>("TaskSubject")
+                        .IsRequired();
+
+                    b.Property<string>("TaskTime")
+                        .IsRequired();
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityTask");
+                });
+
             modelBuilder.Entity("Crm.Entities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -264,7 +305,7 @@ namespace Crm.DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId");
+                    b.Property<int?>("AddressId");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -281,9 +322,9 @@ namespace Crm.DataLayer.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<int>("LeadSourceId");
+                    b.Property<int?>("LeadSourceId");
 
-                    b.Property<int>("LeadStatusId");
+                    b.Property<int?>("LeadStatusId");
 
                     b.Property<string>("Mobile")
                         .IsRequired();
@@ -663,18 +704,15 @@ namespace Crm.DataLayer.Migrations
                 {
                     b.HasOne("AccountErp.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Crm.Entities.LeadSource", "LeadSource")
                         .WithMany()
-                        .HasForeignKey("LeadSourceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadSourceId");
 
                     b.HasOne("Crm.Entities.LeadStatus", "LeadStatus")
                         .WithMany()
-                        .HasForeignKey("LeadStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadStatusId");
                 });
 
             modelBuilder.Entity("Crm.Entities.State", b =>

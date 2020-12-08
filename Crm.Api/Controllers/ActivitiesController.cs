@@ -202,6 +202,63 @@ namespace Crm.Api.Controllers
             return Ok(note);
 
         }
+        //For Task
+        [HttpPost]
+        [Route("addTask")]
+        public async Task<IActionResult> AddTask([FromBody] ActivityTaskModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorList());
+            }
+            try
+            {
+                await _manager.AddAsyncTask(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok();
+        }
+        [HttpPost]
+        [Route("editTask")]
+        public async Task<IActionResult> EditTask([FromBody] ActivityTaskModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorList());
+            }
+            try
+            {
+                await _manager.EditAsyncTask(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok();
+        }
+        [HttpPost]
+        [Route("get-Task-detail")]
+        public async Task<IActionResult> GetDetailTask(ActivityGetModel model)
+        {
+            var call = await _manager.GetTaskDetailAsync(model);
+            if (call == null)
+            {
+                return NotFound();
+            }
+            return Ok(call);
+
+        }
+        [HttpPost]
+        [Route("paged-result-task")]
+        public async Task<IActionResult> GetPagedResultTask(JqDataTableRequest model)
+        {
+            var pagedResult = await _manager.GetPagedResultAsyncTask(model);
+            return Ok(pagedResult);
+        }
+
     }
 }
 

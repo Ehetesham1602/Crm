@@ -110,12 +110,15 @@ namespace Crm.Utilities
             return HashedPassword;
         }
 
-        public static bool Decrypt(string cipher,string password)
+        public static bool Decrypt(string password, string cipher)
         {
-            try
+            try 
             {
                 if (cipher == null) throw new ArgumentNullException("cipher");
-                if (BCrypt.Net.BCrypt.Verify(password, cipher) == true)
+
+                const int WorkFactor = 10;
+                var HashedPassword = BCrypt.Net.BCrypt.HashPassword(password, WorkFactor);
+                if (BCrypt.Net.BCrypt.Verify(password,cipher) == true)
                 {
                     return true;
                 }

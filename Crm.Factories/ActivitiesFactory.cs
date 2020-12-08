@@ -95,5 +95,36 @@ namespace Crm.Factories
             entity.EntityId = model.EntityId;
             entity.EntityMasterId = model.EntityMasterId;
         }
+
+        public static ActivityTask CreateTask(ActivityTaskModel model, string userId)
+        {
+                var task = new ActivityTask
+                {
+                    TaskSubject = model.TaskSubject,
+                    TaskDescription = model.TaskDescription,
+                    TaskPurpose = model.TaskPurpose,
+                    TaskDate = model.TaskDate,
+                    TaskTime = model.TaskTime,
+                    UserId = model.UserId,
+                    DescriptionHtml = model.DescriptionHtml,
+                    EntityId = model.EntityId,
+                    EntityMasterId = model.EntityMasterId,
+                    CreatedBy = userId ?? "0",
+                    CreatedOn = Utility.GetDateTime()
+                };
+                return task;
+        }
+        public static void CreateTask(ActivityTaskModel model, ActivityTask entity, string userId)
+        {
+            entity.TaskSubject = model.TaskSubject;
+            entity.TaskDescription = model.TaskDescription;
+            entity.TaskPurpose = model.TaskPurpose;
+            entity.TaskDate = model.TaskDate;
+            entity.TaskTime = model.TaskTime;
+            entity.UserId = model.UserId;
+            entity.DescriptionHtml = model.DescriptionHtml;
+            entity.EntityId = model.EntityId;
+            entity.EntityMasterId = model.EntityMasterId;
+        }
     }
 }

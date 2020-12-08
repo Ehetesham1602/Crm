@@ -13,7 +13,7 @@ using Crm.Infrastructure.Repositories;
 
 namespace Crm.DataLayer.Repositories
 {
-    public class ActivitiesRepository: IActivitiesRepository
+    public class ActivitiesRepository : IActivitiesRepository
     {
         private readonly DataContext _dataContext;
         public ActivitiesRepository(DataContext dataContext)
@@ -229,6 +229,74 @@ namespace Crm.DataLayer.Repositories
                           })
                           .AsNoTracking()
                           .ToListAsync();
+        }
+        public async Task AddTaskAsync(ActivityTask entity)
+        {
+            await _dataContext.ActivityTask.AddAsync(entity);
+        }
+        public void EditAsyncTask(ActivityTask entity)
+        {
+            _dataContext.ActivityTask.Update(entity);
+        }
+        public async Task<ActivityTask> GetAsyncTask(int id)
+        {
+            return await _dataContext.ActivityTask.FindAsync(id);
+        }
+        public async Task<List<ActivityTaskDetailDto>> GetActivityTaskAsyncById(ActivityGetModel model)
+        {
+            return await (from ac in _dataContext.ActivityTask
+                          where ac.EntityId == model.EntityId && ac.EntityMasterId == model.EntityMasterId
+                          select new ActivityTaskDetailDto
+                          {
+                              Id = ac.Id,
+                              TaskSubject = ac.TaskSubject,
+                              TaskDescription = ac.TaskDescription,
+                              TaskPurpose = ac.TaskPurpose,
+                              TaskDate = ac.TaskDate,
+                              TaskTime = ac.TaskTime,
+                              UserId = ac.UserId,
+                              DescriptionHtml = ac.DescriptionHtml,
+                              EntityId = ac.EntityId,
+                              EntityMasterId = ac.EntityMasterId
+                          })
+                          .AsNoTracking()
+                          .ToListAsync();
+        }
+        public async Task<JqDataTableResponse<ActivityTaskDetailDto>> GetPagedResultAsyncTask(JqDataTableRequest model)
+        {
+            if (model.Length == 0)
+            {
+                model.Length = Constants.DefaultPageSize;
+            }
+            var filerKey = model.Search.Value;
+
+            var linqstmt = (from ac in _dataContext.ActivityTask
+                            where (filerKey == null || EF.Functions.Like(ac.TaskSubject, "%" + filerKey + "%")
+                            || EF.Functions.Like(ac.TaskDescription, "%" + filerKey + "%"))
+                            select new ActivityTaskDetailDto
+                            {
+                                Id = ac.Id,
+                                TaskSubject = ac.TaskSubject,
+                                TaskDescription = ac.TaskDescription,
+                                TaskPurpose = ac.TaskPurpose,
+                                TaskDate = ac.TaskDate,
+                                TaskTime = ac.TaskTime,
+                                UserId = ac.UserId,
+                                DescriptionHtml = ac.DescriptionHtml,
+                                EntityId = ac.EntityId,
+                                EntityMasterId = ac.EntityMasterId
+                            })
+                           .AsNoTracking();
+
+            var sortExpression = model.GetSortExpression();
+
+            var pagedResult = new JqDataTableResponse<ActivityTaskDetailDto>
+            {
+                RecordsTotal = await _dataContext.ActivityTask.CountAsync(),
+                RecordsFiltered = await linqstmt.CountAsync(),
+                Data = await linqstmt.OrderBy(sortExpression).Skip(model.Start).Take(model.Length).ToListAsync()
+            };
+            return pagedResult;
         }
     }
 }
