@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Crm.Dtos\Crm.Dtos.csproj" />
     <ProjectReference Include="..\Crm.Entities\Crm.Entities.csproj" />
     <ProjectReference Include="..\Crm.Models\Crm.Models.csproj" />
   </ItemGroup>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Crm.Dtos.Lead;
 namespace Crm.Factories
 {
     public class LeadFactory
@@ -67,6 +67,8 @@ namespace Crm.Factories
             }
         }
 
+       
+
         public static Lead CreateLead(LeadModels model, string userId)
         {
             var lead = new Lead
@@ -82,6 +84,22 @@ namespace Crm.Factories
                 CreatedOn = Utility.GetDateTime()
             };
             return lead;
+        }
+        public static void updateLead(LeadDto model, Lead entity,String userId)
+        {
+            entity.Id = model.Id;
+            entity.FirstName = model.FirstName;
+            entity.LastName = model.LastName;
+            entity.Email = model.Email;
+            entity.Website = model.Website;
+            entity.Mobile = model.Mobile;
+            entity.Phone = model.Phone;
+            entity.UpdatedBy = userId ?? "0";
+            entity.UpdatedOn = Utility.GetDateTime();
+            entity.UserId = model.UserId;
+            entity.CallStatus = model.CallStatus;
+            entity.CreatedBy = userId ?? "0";
+            entity.CreatedOn = Utility.GetDateTime();
         }
     }
 }

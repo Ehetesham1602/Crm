@@ -37,6 +37,7 @@ namespace Crm.Config
             services.AddScoped<IMasterManager, MasterManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IUserRoleManager, UserRoleManager>();
+            services.AddScoped<ILeadAssignManager, LeadAssignManager>();
 
         }
         public static void ConfigureRepository(IServiceCollection services)
@@ -50,6 +51,7 @@ namespace Crm.Config
             services.AddScoped<IMasterRepository, MasterRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<ILeadAssignRepository, LeadAssignRepository>();
 
         }
         public static void ConfigureServices(IServiceCollection services)

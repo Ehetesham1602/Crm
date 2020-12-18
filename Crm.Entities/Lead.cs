@@ -26,6 +26,8 @@ namespace Crm.Entities
         public int? AddressId { get; set; }
         public Address Address { get; set; }
         public string Phone { get; set; }
-
+        public int? UserId { get; set; }
+        public Boolean CallStatus { get; set; }
+        public User User { get; set; }
     }
 }

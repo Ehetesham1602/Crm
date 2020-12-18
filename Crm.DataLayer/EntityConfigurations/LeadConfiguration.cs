@@ -29,6 +29,9 @@ namespace Crm.DataLayer.EntityConfigurations
             builder.HasOne(x => x.LeadStatus).WithMany().HasForeignKey(x => x.LeadStatusId);
             builder.HasOne(x => x.Address).WithMany().HasForeignKey(x => x.AddressId);
             builder.Property(x => x.Phone).IsRequired();
+            builder.Property(x => x.UserId).IsRequired(false);
+            builder.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId);
+            builder.Property(x => x.CallStatus).IsRequired();
         }
     }
 }
