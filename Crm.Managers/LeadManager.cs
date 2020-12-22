@@ -58,6 +58,11 @@ namespace Crm.Managers
         {
             return await _leadRepository.GetPagedResultAsync(model);
         }
+        public async Task<JqDataTableResponse<LeadDto>> GetPagedResultAsyncById(JqDataTableRequest model)
+        {
+            return await _leadRepository.GetPagedResultAsyncByid(model);
+
+        }
         public async Task<List<LeadDto>> GetAllLead()
         {
             return await _leadRepository.GetAllLead();

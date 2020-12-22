@@ -21,5 +21,7 @@ namespace Crm.Infrastructure.Managers
         Task DeleteAsync(int id);
         Task AddQualifyAnswersAsync(List<QualifyQuestionAnswerAddModel> model);
         Task<List<QualifyQuestionAnswers>> GetAnswerById(int id);
+        Task<List<QualifyQuestionDetailDto>> GetAllAsync();
+
     }
 }

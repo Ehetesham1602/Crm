@@ -75,6 +75,10 @@ namespace Crm.Managers
         {
             return await _repository.GetAsyncQualifyAnswer(id);
         }
+        public async Task<List<QualifyQuestionDetailDto>> GetAllAsync()
+        {
+            return await _repository.GetAllAsync();
+        }
     }
 }
 

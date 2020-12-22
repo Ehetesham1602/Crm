@@ -125,6 +125,19 @@ namespace Crm.Api.Controllers
             return Ok(await _manager.GetAnswerById(id));
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("get-all")]
+        public async Task<IActionResult> GetAll()
+        {
+            var data = await _manager.GetAllAsync();
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
     }
 }
 

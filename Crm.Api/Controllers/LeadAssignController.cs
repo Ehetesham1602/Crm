@@ -47,7 +47,7 @@ namespace Crm.Api.Controllers
                 var leadCount = leadList.Count();
                 var userCount = userList.Count();
                 var size = leadCount / userCount;
-                if (leadCount % 2 != 0)
+                if (leadCount % 2 != 0 && userCount > 1)
                 {
                     size = size + 1;
                 }

@@ -66,6 +66,55 @@ namespace Crm.DataLayer.Repositories
                                 LeadStatusId = l.LeadStatusId ?? 0,
                                 Status = l.Status,
                                 Phone = l.Phone,
+                                CallStatus = l.CallStatus,
+                                Address = new AddressDto
+                                {
+                                    Id = l.Address.Id,
+                                    CountryName = l.Address.Country.CountryName,
+                                    StateName = l.Address.State.StateName,
+                                    CityName = l.Address.City.CityName,
+                                    StreetName = l.Address.StreetName,
+                                    PostalCode = l.Address.PostalCode
+
+                                }
+                            })
+                           .AsNoTracking();
+
+            var sortExpression = model.GetSortExpression();
+
+            var pagedResult = new JqDataTableResponse<LeadDto>
+            {
+                RecordsTotal = await _dataContext.Lead.CountAsync(x => x.Status != Constants.RecordStatus.Deleted),
+                RecordsFiltered = await linqstmt.CountAsync(),
+                Data = await linqstmt.OrderBy(sortExpression).Skip(model.Start).Take(model.Length).ToListAsync()
+            };
+            return pagedResult;
+        }
+
+        public async Task<JqDataTableResponse<LeadDto>> GetPagedResultAsyncByid(JqDataTableRequest model)
+        {
+            if (model.Length == 0)
+            {
+                model.Length = Constants.DefaultPageSize;
+            }
+            var filerKey = model.Search.Value;
+
+            var linqstmt = (from l in _dataContext.Lead
+                            where l.UserId == model.filterKeyId && l.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(l.FirstName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.LastName, "%" + filerKey + "%"))
+                            select new LeadDto
+                            {
+                                Id = l.Id,
+                                FirstName = l.FirstName,
+                                LastName = l.LastName,
+                                Email = l.Email,
+                                Website = l.Website,
+                                Mobile = l.Mobile,
+                                LeadSourceId = l.LeadSourceId ?? 0,
+                                LeadStatusId = l.LeadStatusId ?? 0,
+                                Status = l.Status,
+                                Phone = l.Phone,
+                                CallStatus = l.CallStatus,
                                 Address = new AddressDto
                                 {
                                     Id = l.Address.Id,

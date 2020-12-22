@@ -13,6 +13,8 @@ namespace Crm.Utilities
 
         public string filterKey { get; set; }
 
+        public int filterKeyId { get; set; }
+
         public JqDataTableSearch Search { get; set; }
 
         public List<JqDataTableSort> Order { get; set; }

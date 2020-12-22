@@ -17,5 +17,6 @@ namespace Crm.Infrastructure.Repositories
         Task<JqDataTableResponse<LeadDto>> GetPagedResultAsync(JqDataTableRequest model);
         Task<LeadDto> GetDetailAsync(int id);
         Task<List<LeadDto>> GetAllLead();
+        Task<JqDataTableResponse<LeadDto>> GetPagedResultAsyncByid(JqDataTableRequest model);
     }
 }

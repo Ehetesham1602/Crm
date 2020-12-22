@@ -81,6 +81,15 @@ namespace Crm.Api.Controllers
             return Ok(pagedResult);
         }
 
+        [HttpPost]
+        [Route("paged-result-byid")]
+        public async Task<IActionResult> GetPagedResultById(JqDataTableRequest model)
+        {
+            var pagedResult = await _leadManager.GetPagedResultAsyncById(model);
+            return Ok(pagedResult);
+        }
+
+
         [HttpGet]
         [Route("get-detail/{id}")]
         public async Task<IActionResult> GetDetail(int id)

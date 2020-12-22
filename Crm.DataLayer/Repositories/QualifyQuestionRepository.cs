@@ -127,6 +127,20 @@ namespace Crm.DataLayer.Repositories
             }
             
         }
+        public async Task<List<QualifyQuestionDetailDto>> GetAllAsync()
+        {
+            return await (from s in _dataContext.QualifyQuestion
+                          select new QualifyQuestionDetailDto
+                          {
+                              Id = s.Id,
+                              QuestionCode = s.QuestionCode,
+                              QuestionName = s.QuestionName,
+                              FieldTypeId = s.FieldTypeId,
+                              Options = s.Options
+                          })
+                          .AsNoTracking()
+                          .ToListAsync();
+        }
 
     }
 }

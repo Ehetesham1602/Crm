@@ -17,5 +17,6 @@ namespace Crm.Infrastructure.Managers
         Task<JqDataTableResponse<LeadDto>> GetPagedResultAsync(JqDataTableRequest model);
         Task<List<LeadDto>> GetAllLead();
         Task AddLeadAsync(List<LeadModels> model);
+        Task<JqDataTableResponse<LeadDto>> GetPagedResultAsyncById(JqDataTableRequest model);
     }
 }

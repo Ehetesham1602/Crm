@@ -24,5 +24,7 @@ namespace Crm.Infrastructure.Repositories
         Task AddQualifyAnswerAsync(List<QualifyQuestionAnswers> entity);
         Task<List<QualifyQuestionAnswers>> GetAsyncQualifyAnswer(int id);
         Task DeleteAsyncQuestionAnswer(int id);
+        Task<List<QualifyQuestionDetailDto>> GetAllAsync();
+
     }
 }
