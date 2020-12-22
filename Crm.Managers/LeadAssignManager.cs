@@ -54,6 +54,19 @@ namespace Crm.Managers
         {
             return await _leadAssignRepository.GetByAgentIdAsync(id);
         }
+        /*public async Task UpdateCallStatusAsync(LeadDto leadId)
+        {
+                Lead lead = new Lead();
+                LeadFactory.UpdateCallStatusAsync(leadId, lead, _userId);
+                _leadRepository.Edit(lead);
+            
+            await _unitOfWork.SaveChangesAsync();
 
+        }*/
+        public async Task ChechCallStatusByIdAsync(int id)
+        {
+            await _leadAssignRepository.ChechCallStatusByIdAsync(id);
+            await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

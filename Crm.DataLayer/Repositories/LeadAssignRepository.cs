@@ -19,7 +19,7 @@ namespace Crm.DataLayer.Repositories
         {
             _dataContext = dataContext;
         }
-  
+
 
         public void Edit(Lead entity)
         {
@@ -28,7 +28,7 @@ namespace Crm.DataLayer.Repositories
         public async Task<List<UserDetailDto>> GetAllUser()
         {
             var linqstmt = await (from u in _dataContext.User
-                                  where u.Status != Constants.RecordStatus.Deleted && u.Role.RoleName == "Agent" 
+                                  where u.Status != Constants.RecordStatus.Deleted && u.Role.RoleName == "Agent"
                                   select new UserDetailDto
                                   {
                                       Id = u.Id,
@@ -75,7 +75,7 @@ namespace Crm.DataLayer.Repositories
         public async Task<List<LeadDto>> GetByAgentIdAsync(int id)
         {
             return await (from l in _dataContext.Lead
-                          where l.UserId == id && l.Status != Constants.RecordStatus.Deleted 
+                          where l.UserId == id && l.Status != Constants.RecordStatus.Deleted
                           select new LeadDto
                           {
                               Id = l.Id,
@@ -89,9 +89,30 @@ namespace Crm.DataLayer.Repositories
                               Status = l.Status,
                               Phone = l.Phone,
                               UserId = l.UserId,
-                              CallStatus = l.CallStatus                          })
+                              CallStatus = l.CallStatus
+                          })
                           .AsNoTracking()
                          .ToListAsync();
+        }
+
+        /*public async Task<LeadDto> ChechCallStatusByIdAsync(int id)
+        {
+            var linq = await (from l in _dataContext.Lead
+                        where l.Id == id && l.CallStatus == false
+                        select new LeadDto
+                        {
+                            Id = l.Id,
+                            UserId = l.UserId,
+                            CallStatus = l.CallStatus
+                        }).AsNoTracking().SingleOrDefaultAsync();
+            
+            return linq;
+        }*/
+        public async Task ChechCallStatusByIdAsync(int id)
+        {
+            var lead = await _dataContext.Lead.FindAsync(id);
+            lead.CallStatus = true;
+            _dataContext.Lead.Update(lead);
         }
     }
 }

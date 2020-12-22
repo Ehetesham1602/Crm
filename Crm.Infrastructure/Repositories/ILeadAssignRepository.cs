@@ -12,6 +12,9 @@ namespace Crm.Infrastructure.Repositories
         Task<List<UserDetailDto>> GetAllUser();
         Task<List<LeadDto>> GetByAgentIdAsync(int id);
         Task<List<LeadDto>> GetAllLead();
+        Task ChechCallStatusByIdAsync(int id);
+        //Task<LeadDto> ChechCallStatusByIdAsync(int id);
+
         // void Edit(List<LeadDto> leadList);
     }
 }
