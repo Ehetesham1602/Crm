@@ -83,5 +83,20 @@ namespace Crm.Api.Controllers
             return Ok(lead);
 
         }
+        [HttpPost]
+        [Route("chech-call-status-by/{id}")]
+        public async Task<IActionResult> ChechCallStatusById(int id)
+        {
+            await _leadAssignManager.ChechCallStatusByIdAsync(id);
+            return Ok();
+            /*var leadId = await _leadAssignRepository.ChechCallStatusByIdAsync(id);
+            
+            if (leadId != null)
+            {
+                await _leadAssignManager.UpdateCallStatusAsync(leadId);
+            }
+            return Ok();*/
+
+        }
     }
 }

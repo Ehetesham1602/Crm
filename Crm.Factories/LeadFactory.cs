@@ -101,5 +101,14 @@ namespace Crm.Factories
             entity.CreatedBy = userId ?? "0";
             entity.CreatedOn = Utility.GetDateTime();
         }
+        public static void UpdateCallStatusAsync(LeadDto model, Lead entity, string userId)
+        {
+            entity.Id = model.Id;
+            entity.CallStatus = model.CallStatus;
+            entity.CreatedBy = userId ?? "0";
+            entity.CreatedOn = Utility.GetDateTime();
+            entity.UpdatedBy = userId ?? "0";
+            entity.UpdatedOn = Utility.GetDateTime();
+        }
     }
 }
