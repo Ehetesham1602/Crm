@@ -15,5 +15,6 @@ namespace Crm.Dtos.UserLogin
         public string Mobile { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public bool CallStatus { get; set; }
     }
 }

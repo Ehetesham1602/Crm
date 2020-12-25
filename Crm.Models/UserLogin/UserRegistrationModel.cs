@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Crm.Models.UserLogin
 {
-    public class UserRegistrationModel
+    public class UserLoginDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

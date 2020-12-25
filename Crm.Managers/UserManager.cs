@@ -30,13 +30,19 @@ namespace Crm.Managers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddAsync(UserRegistrationModel model)
+        public async Task AddAsync(UserLoginDto model)
         {
             await _repository.AddAsync(UserFactory.Create(model, _userId));
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task EditAsync(UserRegistrationModel model)
+        public async Task LoginAddAsync(UserDetailDto model)
+        {
+            await _repository.LoginAddAsync(UserFactory.Login(model));
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(UserLoginDto model)
         {
             var item = await _repository.GetAsync(model.Id);
             UserFactory.Create(model, item, _userId);
@@ -71,5 +77,21 @@ namespace Crm.Managers
         {
             return await _repository.GetAgentPagedResultAsync(model);
         }
+
+        public async Task LogOut(int id)
+        {
+           await _repository.LogOut(id);
+            await _unitOfWork.SaveChangesAsync();
+        }
+        public async Task<JqDataTableResponse<UserDetailDto>> GetOnlineAgentPagedResultAsync(JqDataTableRequest model)
+        {
+            return await _repository.GetOnlineAgentPagedResultAsync(model);
+        }
+
+        public async Task<JqDataTableResponse<UserDetailDto>> GetOnlyOnlineAgentPagedResultAsync(JqDataTableRequest model)
+        {
+            return await _repository.GetOnlyOnlineAgentPagedResultAsync(model);
+        }
+
     }
 }

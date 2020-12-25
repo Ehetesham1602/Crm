@@ -15,6 +15,14 @@
     <Compile Remove="Migrations\20200910080036_accountStructureChange10092020.Designer.cs" />
     <Compile Remove="Migrations\20200913183855_db_new14092020.cs" />
     <Compile Remove="Migrations\20200913183855_db_new14092020.Designer.cs" />
+    <Compile Remove="Migrations\20201223103249_loginmodulechange23122020.cs" />
+    <Compile Remove="Migrations\20201223103249_loginmodulechange23122020.Designer.cs" />
+    <Compile Remove="Migrations\20201223104702_loginmodulechange23122020.cs" />
+    <Compile Remove="Migrations\20201223104702_loginmodulechange23122020.Designer.cs" />
+    <Compile Remove="Migrations\20201223105525_loginmodulechange23122020.cs" />
+    <Compile Remove="Migrations\20201223105525_loginmodulechange23122020.Designer.cs" />
+    <Compile Remove="Migrations\20201223110029_loginmodulechange23122020.cs" />
+    <Compile Remove="Migrations\20201223110029_loginmodulechange23122020.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

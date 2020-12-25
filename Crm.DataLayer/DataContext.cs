@@ -29,6 +29,7 @@ namespace Crm.DataLayer
         public DbSet<User> User { get; set; }
         public DbSet<UserRole> UsersRoles { get; set; }
         public DbSet<ActivityTask> ActivityTask { get; set; }
+        public DbSet<LoginModule> LoginModule { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -49,6 +50,7 @@ namespace Crm.DataLayer
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new ActivityTaskConfiguration());
+            modelBuilder.ApplyConfiguration(new LoginModuleConfiguration());
         }
     }
 }

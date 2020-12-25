@@ -1,4 +1,5 @@
-﻿using Crm.Entities;
+﻿using Crm.Dtos.UserLogin;
+using Crm.Entities;
 using Crm.Models.UserLogin;
 using Crm.Utilities;
 using System;
@@ -9,7 +10,7 @@ namespace Crm.Factories
 {
     public class UserFactory
     {
-        public static User Create(UserRegistrationModel model, string userId)
+        public static User Create(UserLoginDto model, string userId)
         {
             var data = new User
             {
@@ -26,7 +27,7 @@ namespace Crm.Factories
             };
             return data;
         }
-        public static void Create(UserRegistrationModel model, User entity, string userId)
+        public static void Create(UserLoginDto model, User entity, string userId)
         {
             entity.FirstName = model.FirstName;
             entity.LastName = model.LastName;
@@ -37,6 +38,19 @@ namespace Crm.Factories
             entity.Mobile = model.Mobile;
             entity.UpdatedBy = userId ?? "0";
             entity.UpdatedOn = Utility.GetDateTime();
+        }
+
+
+        public static LoginModule Login(UserDetailDto model)
+        {
+            var data = new LoginModule
+            {
+                UserId = model.Id,
+                status = true,
+                createdOn = Utility.GetDateTime(),
+                RoleId = model.RoleId
+            };
+            return data;
         }
     }
 }

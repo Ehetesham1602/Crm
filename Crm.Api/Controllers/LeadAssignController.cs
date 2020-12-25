@@ -54,7 +54,7 @@ namespace Crm.Api.Controllers
                 int k = 0;
                 for (int i = 0; i < userCount; i++)
                 {
-                    for (int j = i; j < size; j++)
+                    for (int j = 0;j < size; j++)
                     {
                         leadList[k].UserId = userList[i].Id;
                         k++;

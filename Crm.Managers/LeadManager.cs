@@ -70,9 +70,15 @@ namespace Crm.Managers
         public async Task AddLeadAsync(List<LeadModels> model)
         {
             LeadModels lead = new LeadModels();
+          
+
             List<LeadModels> distinct = model.GroupBy(x => new { x.FirstName, x.LastName, x.Email, x.Mobile })
                                         .Select(x => x.First())
                                         .ToList();
+            List<LeadModels> distinctContact = model.GroupBy(x => new { x.Mobile })
+                                     .Select(x => x.First())
+                                     .ToList();
+
             foreach (var addLead in distinct)
             {
                 var leadfact = LeadFactory.CreateLead(addLead, _userId);

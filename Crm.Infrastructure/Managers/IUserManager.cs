@@ -10,9 +10,9 @@ namespace Crm.Infrastructure.Managers
 {
     public interface IUserManager
     {
-        Task AddAsync(UserRegistrationModel model);
-
-        Task EditAsync(UserRegistrationModel model);
+        Task AddAsync(UserLoginDto model);
+        Task LoginAddAsync(UserDetailDto model);
+        Task EditAsync(UserLoginDto model);
 
         Task<UserDetailDto> GetDetailAsync(int id);
 
@@ -21,5 +21,8 @@ namespace Crm.Infrastructure.Managers
         Task<UserDetailDto> CheckUser(string username);
         Task<UserDetailDto> Login(UserLoginModel model);
         Task<JqDataTableResponse<UserDetailDto>> GetAgentPagedResultAsync(JqDataTableRequest model);
+        Task LogOut(int id);
+        Task<JqDataTableResponse<UserDetailDto>> GetOnlineAgentPagedResultAsync(JqDataTableRequest model);
+        Task<JqDataTableResponse<UserDetailDto>> GetOnlyOnlineAgentPagedResultAsync(JqDataTableRequest model);
     }
 }

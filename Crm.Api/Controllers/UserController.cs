@@ -30,7 +30,7 @@ namespace Crm.Api.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<IActionResult> Add([FromBody] UserRegistrationModel model)
+        public async Task<IActionResult> Add([FromBody] UserLoginDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace Crm.Api.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public async Task<IActionResult> Edit([FromBody] UserRegistrationModel model)
+        public async Task<IActionResult> Edit([FromBody] UserLoginDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -118,6 +118,7 @@ namespace Crm.Api.Controllers
                 }
                 else
                 {
+                    await _manager.LoginAddAsync(data);
                    // HttpContext.Session.SetString("UserId", data.Id.ToString());
                     return Ok(data);
                 }
@@ -135,6 +136,28 @@ namespace Crm.Api.Controllers
         public async Task<IActionResult> AgentPagedResult(JqDataTableRequest model)
         {
             return Ok(await _manager.GetAgentPagedResultAsync(model));
+        }
+
+        [HttpPost]
+        [Route("logout/{id}")]
+        public async Task<IActionResult> LogOut(int id)
+        {
+            await _manager.LogOut(id);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("onlineAgent-paged-result")]
+        public async Task<IActionResult> OnlineAgentPagedResult(JqDataTableRequest model)
+        {
+            return Ok(await _manager.GetOnlineAgentPagedResultAsync(model));
+        }
+
+        [HttpPost]
+        [Route("getOnly-Online-paged-result")]
+        public async Task<IActionResult> OnlyneAgentPagedResult(JqDataTableRequest model)
+        {
+            return Ok(await _manager.GetOnlyOnlineAgentPagedResultAsync(model));
         }
     }
 }
