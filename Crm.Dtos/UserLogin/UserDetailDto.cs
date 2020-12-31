@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crm.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,5 +17,6 @@ namespace Crm.Dtos.UserLogin
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public bool CallStatus { get; set; }
+        public Constants.RecordStatus Status { get; set; }
     }
 }
