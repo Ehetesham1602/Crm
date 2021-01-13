@@ -29,5 +29,6 @@ namespace Crm.Dtos.Lead
         public string Phone { get; set; }
         public int? UserId { get; set; }
         public bool CallStatus { get; set; }
+        
     }
 }

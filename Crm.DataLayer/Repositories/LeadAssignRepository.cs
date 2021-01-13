@@ -67,7 +67,7 @@ namespace Crm.DataLayer.Repositories
                                       CallStatus = l.CallStatus
 
                                   })
-                            .AsNoTracking()
+                            .AsNoTracking().Take(100)
                             .ToListAsync();
 
             return linqstmt;
