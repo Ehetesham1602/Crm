@@ -52,10 +52,10 @@ namespace Crm.Factories
             entity.UpdatedBy = userId ?? "0";
             entity.UpdatedOn = Utility.GetDateTime();
             
-            if (!model.Address.Id.HasValue && model.Address.IsAllNullOrEmpty())
-            {
-                return;
-            }
+            //if (!model.Address.Id.HasValue && model.Address.IsAllNullOrEmpty())
+            //{
+            //    return;
+            //}
 
             if (entity.Address != null)
             {
@@ -81,7 +81,8 @@ namespace Crm.Factories
                 Status = Constants.RecordStatus.Active,
                 Phone = model.Phone,
                 CreatedBy = userId ?? "0",
-                CreatedOn = Utility.GetDateTime()
+                CreatedOn = Utility.GetDateTime(),
+                CallStatus = Constants.LeadCallStatus.NotDone
             };
             return lead;
         }

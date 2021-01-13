@@ -84,10 +84,10 @@ namespace Crm.Api.Controllers
 
         }
         [HttpPost]
-        [Route("chech-call-status-by/{id}")]
-        public async Task<IActionResult> ChechCallStatusById(int id)
+        [Route("change-call-status-by")]
+        public async Task<IActionResult> ChangeCallStatusById(ChangeCallStatusModel changeCallStatusModel)
         {
-            await _leadAssignManager.ChechCallStatusByIdAsync(id);
+            await _leadAssignManager.ChangeCallStatusByIdAsync(changeCallStatusModel);
             return Ok();
             /*var leadId = await _leadAssignRepository.ChechCallStatusByIdAsync(id);
             

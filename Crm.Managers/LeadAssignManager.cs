@@ -63,9 +63,9 @@ namespace Crm.Managers
             await _unitOfWork.SaveChangesAsync();
 
         }*/
-        public async Task ChechCallStatusByIdAsync(int id)
+        public async Task ChangeCallStatusByIdAsync(ChangeCallStatusModel changeCallStatusModel)
         {
-            await _leadAssignRepository.ChechCallStatusByIdAsync(id);
+            await _leadAssignRepository.ChangeCallStatusByIdAsync(changeCallStatusModel);
             await _unitOfWork.SaveChangesAsync();
         }
     }

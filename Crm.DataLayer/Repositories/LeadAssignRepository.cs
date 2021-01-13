@@ -9,6 +9,7 @@ using System.Linq;
 using Crm.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Crm.Dtos.Lead;
+using Crm.Models.Lead;
 
 namespace Crm.DataLayer.Repositories
 {
@@ -50,7 +51,7 @@ namespace Crm.DataLayer.Repositories
         public async Task<List<LeadDto>> GetAllLead()
         {
             var linqstmt = await (from l in _dataContext.Lead
-                                  where l.Status != Constants.RecordStatus.Deleted && l.CallStatus == false && l.UserId == null
+                                  where l.Status != Constants.RecordStatus.Deleted && l.CallStatus == Constants.LeadCallStatus.NotDone && l.UserId == null
                                   select new LeadDto
                                   {
                                       Id = l.Id,
@@ -108,10 +109,10 @@ namespace Crm.DataLayer.Repositories
             
             return linq;
         }*/
-        public async Task ChechCallStatusByIdAsync(int id)
+        public async Task ChangeCallStatusByIdAsync(ChangeCallStatusModel changeCallStatusModel )
         {
-            var lead = await _dataContext.Lead.FindAsync(id);
-            lead.CallStatus = true;
+            var lead = await _dataContext.Lead.FindAsync(changeCallStatusModel.Id);
+            lead.CallStatus = changeCallStatusModel.CallStatus;
             _dataContext.Lead.Update(lead);
         }
     }

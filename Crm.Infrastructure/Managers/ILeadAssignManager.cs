@@ -13,6 +13,6 @@ namespace Crm.Infrastructure.Managers
         Task EditAsync(List<LeadDto> leadList);
         Task<List<LeadDto>> GetByAgentIdAsync(int id);
         //Task UpdateCallStatusAsync(int id);
-        Task ChechCallStatusByIdAsync(int id);
+        Task ChangeCallStatusByIdAsync(ChangeCallStatusModel changeCallStatusModel);
     }
 }

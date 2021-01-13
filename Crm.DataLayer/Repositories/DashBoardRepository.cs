@@ -102,11 +102,10 @@ namespace Crm.DataLayer.Repositories
             DateTime endDateTime = DateTime.Today.AddDays(1).AddTicks(-1); //Today at 23:59:59
             where (l.CreatedOn >= startDateTime && l.CreatedOn <= endDateTime) && l.CallStatus == false */
             var linq = await (from l in _dataContext.Lead
-                              where l.UserId == id && l.CreatedOn.Date == DateTime.Today && l.CallStatus == true
+                              where l.UserId == id && l.CreatedOn.Date == DateTime.Today && l.CallStatus == Constants.LeadCallStatus.CallDone
                               select new LeadDto
                               {
-                                  CreatedOn = l.CreatedOn,
-                                  CallStatus = false
+                                  CreatedOn = l.CreatedOn
                               }
                               ).AsNoTracking().ToListAsync();
             return linq;
@@ -114,10 +113,9 @@ namespace Crm.DataLayer.Repositories
         public async Task<List<LeadDto>> GetCallRemaining(int id)
         {
             var linq = await (from l in _dataContext.Lead
-                              where l.UserId == id && l.CreatedOn.Date == DateTime.Today && l.CallStatus == false
+                              where l.UserId == id && l.CreatedOn.Date == DateTime.Today && l.CallStatus == Constants.LeadCallStatus.NotDone
                               select new LeadDto
                               {
-                                  CallStatus = true,
                                   CreatedOn = l.CreatedOn
                               }).AsNoTracking().ToListAsync();
             return linq;
@@ -126,7 +124,7 @@ namespace Crm.DataLayer.Repositories
         {
             var dateTime = new DateTime(2000, mnt, 1);
             var linq = await (from l in _dataContext.Lead
-                              where l.CallStatus == true && l.CreatedOn.Month == dateTime.Month
+                              where l.CallStatus == Constants.LeadCallStatus.CallDone && l.CreatedOn.Month == dateTime.Month
                               select new LeadDto
                               {
                                   Id = l.Id,

@@ -3,6 +3,7 @@ using Crm.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static Crm.Utilities.Constants;
 
 namespace Crm.Entities
 {
@@ -27,7 +28,7 @@ namespace Crm.Entities
         public Address Address { get; set; }
         public string Phone { get; set; }
         public int? UserId { get; set; }
-        public Boolean CallStatus { get; set; }
+        public LeadCallStatus CallStatus { get; set; }
         public User User { get; set; }
     }
 }

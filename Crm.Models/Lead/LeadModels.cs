@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using static Crm.Utilities.Constants;
 
 namespace Crm.Models.Lead
 {
@@ -19,6 +20,6 @@ namespace Crm.Models.Lead
         public Constants.RecordStatus Status { get; set; }
         public string Phone { get; set; }
         public int? UserId { get; set; }
-        public bool CallStatus { get; set; }
+        public LeadCallStatus CallStatus { get; set; }
     }
 }

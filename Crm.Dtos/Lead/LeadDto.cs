@@ -5,6 +5,7 @@ using AccountErp.Dtos.Address;
 using Crm.Dtos.LeadSource;
 using Crm.Dtos.LeadStatus;
 using Crm.Utilities;
+using static Crm.Utilities.Constants;
 
 namespace Crm.Dtos.Lead
 {
@@ -28,6 +29,6 @@ namespace Crm.Dtos.Lead
         public AddressDto Address { get; set; }
         public string Phone { get; set; }
         public int? UserId { get; set; }
-        public bool CallStatus { get; set; }
+        public LeadCallStatus CallStatus { get; set; }
     }
 }

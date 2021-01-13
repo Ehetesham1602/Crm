@@ -9,6 +9,7 @@
         public enum RecordStatus { Created, Active, Inactive, Deleted }
         public enum FieldTypeId { Text, Select, Radio, Checkbox }
         public enum EntityMasterId { Lead, Account, Opportunity }
+        public enum LeadCallStatus { CallDone, CallReject, ReCall, NotDone}
 
         public struct Account
         {
