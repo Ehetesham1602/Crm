@@ -96,11 +96,11 @@ namespace Crm.DataLayer.Repositories
         ///
         public async Task AddQualifyAnswerAsync(List<QualifyQuestionAnswers> entity)
         {
-            foreach(var item in entity)
+            foreach (var item in entity)
             {
                 await _dataContext.QualifyQuestionAnswers.AddAsync(item);
             }
-            
+
         }
 
         public async Task<List<QualifyQuestionAnswers>> GetAsyncQualifyAnswer(int id)
@@ -120,12 +120,12 @@ namespace Crm.DataLayer.Repositories
 
         public async Task DeleteAsyncQuestionAnswer(int id)
         {
-            var data = await _dataContext.QualifyQuestionAnswers.Where(x=> x.EntityId == id).ToListAsync();
-          foreach(var item in data)
+            var data = await _dataContext.QualifyQuestionAnswers.Where(x => x.EntityId == id).ToListAsync();
+            foreach (var item in data)
             {
                 _dataContext.QualifyQuestionAnswers.Remove(item);
             }
-            
+
         }
         public async Task<List<QualifyQuestionDetailDto>> GetAllAsync()
         {

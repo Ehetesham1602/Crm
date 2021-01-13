@@ -1,5 +1,6 @@
 ﻿using Crm.Api.Helpers;
 using Crm.Dtos.Lead;
+using Crm.Dtos.LeadAssign;
 using Crm.Dtos.UserLogin;
 using Crm.Infrastructure.DataLayer;
 using Crm.Infrastructure.Managers;
@@ -41,35 +42,20 @@ namespace Crm.Api.Controllers
             }
             try
             {
-                //List<LeadDto> leadList = await _leadManager.GetAllLead();
-                List<LeadDto> leadList = await _leadAssignRepository.GetAllLead();
-                List<UserDetailDto> userList = await _leadAssignRepository.GetAllUser();
-                var leadCount = leadList.Count();
-                var userCount = userList.Count();
-                var size = leadCount / userCount;
-                if (leadCount % 2 != 0 && userCount > 1)
-                {
-                    size = size + 1;
-                }
-                int k = 0;
-                for (int i = 0; i < userCount; i++)
-                {
-                    for (int j = 0;j < size; j++)
-                    {
-                        leadList[k].UserId = userList[i].Id;
-                        k++;
-
-                    }
-
-                }
-
-                await _leadAssignManager.EditAsync(leadList);
+                await _leadAssignManager.EditAsync();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
             return Ok();
+        }
+        [HttpGet]
+        [Route("get-lead-assign-info")]
+        public async Task<List<LeadAssignDto>> GetLeadAssignInfoAsync()
+        {
+            return await _leadAssignManager.GetLeadAssignInfoAsync();
+
         }
         [HttpGet]
         [Route("get-agent-by/{id}")]

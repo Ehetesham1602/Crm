@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Crm.Entities\Crm.Entities.csproj" />
     <ProjectReference Include="..\Crm.Utilities\Crm.Utilities.csproj" />
   </ItemGroup>
 
