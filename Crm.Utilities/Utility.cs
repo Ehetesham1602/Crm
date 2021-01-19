@@ -136,6 +136,11 @@ namespace Crm.Utilities
             //decrypt data
             // byte[] decrypted = ProtectedData.Unprotect(data, null, DataProtectionScope.CurrentUser);
             //return Encoding.Unicode.GetString(decrypted);
+           
+        }
+        public static string GetEmailAttachmentFileUrl(string baseUrl, string fileName)
+        {
+            return $"{baseUrl}/EmailAttachment/{fileName}";
         }
     }
 }

@@ -29,7 +29,7 @@
 
   <ItemGroup> 
     <Folder Include="Connected Services\" /> 
-    <Folder Include="wwwroot\invoice\" />
+    <Folder Include="wwwroot\EmailAttachment\" />
     <Folder Include="wwwroot\temp\" />
   </ItemGroup>
 

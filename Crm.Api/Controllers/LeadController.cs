@@ -155,5 +155,25 @@ namespace Crm.Api.Controllers
             await _emailManager.SendLeadAsync(lead.Email, model);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("upload-attachment")]
+        public async Task<IActionResult> UploadAttachment([FromForm] IFormFile file)
+        {
+            var dirPath = Utility.GetTempFolder(_hostingEnvironment.WebRootPath);
+
+            var fileName = Utility.GetUniqueFileName(file.FileName);
+
+            using (var fileStream = new FileStream(dirPath + fileName, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            return Ok(new
+            {
+                fileName,
+                fileUrl = Utility.GetEmailAttachmentFileUrl(Request.GetBaseUrl(), fileName)
+            });
+        }
     }
 }
