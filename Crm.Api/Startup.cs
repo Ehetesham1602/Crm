@@ -15,6 +15,7 @@ using IRecurringJobManager = Hangfire.IRecurringJobManager;
 using Crm.Config;
 using Crm.DataLayer;
 using Microsoft.Extensions.Azure;
+using AccountErp.Models.Email;
 
 namespace Crm.Api
 {
@@ -32,6 +33,8 @@ namespace Crm.Api
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
+            //using for email sending
+            services.Configure<EmailModel>(Configuration.GetSection("Smtp"));
 
             services.Configure<IdentityOptions>(options =>
             {

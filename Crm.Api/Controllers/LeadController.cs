@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.IO;
+using Crm.Models.Email;
+using AccountErp.Infrastructure.Managers;
+
 namespace Crm.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -21,10 +24,13 @@ namespace Crm.Api.Controllers
     {
         //[Authorize]
             private readonly ILeadManager _leadManager;
-
-            public LeadController(ILeadManager manager)
+            private readonly IHostingEnvironment _hostingEnvironment;
+            private readonly IEmailManager _emailManager;
+            public LeadController(ILeadManager manager, IHostingEnvironment hostingEnvironment, IEmailManager emailManager)
             {
             _leadManager = manager;
+            _hostingEnvironment = hostingEnvironment;
+            _emailManager = emailManager;
             }
 
             [HttpPost]
@@ -127,6 +133,27 @@ namespace Crm.Api.Controllers
 
             return Ok();
         }
+      
+        [HttpPost]
+        [Route("send")]
+        public async Task<IActionResult> SendLead(EmailLeadModel model)
+        {
+            var lead = await _leadManager.GetDetailAsync(model.Id);
+            if (lead.Email == null)
+            {
+                BadRequest("Customer doesn't have email address");
+            }
 
+            /*var dirPath = Utility.GetInvoiceFolder(_hostingEnvironment.WebRootPath);
+            var completePath = dirPath + lead.Id + "_" + ".pdf";
+            if (!System.IO.File.Exists(completePath))
+            {
+                var renderer = new IronPdf.HtmlToPdf();
+                renderer.RenderHtmlAsPdf(model.Html).SaveAs(completePath);
+            }*/
+            //await _emailManager.SendLeadAsync(lead.Email, completePath);
+            await _emailManager.SendLeadAsync(lead.Email, model);
+            return Ok();
+        }
     }
 }

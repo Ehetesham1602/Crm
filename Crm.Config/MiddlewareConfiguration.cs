@@ -1,11 +1,13 @@
-﻿using Crm.DataLayer;
+﻿using AccountErp.Infrastructure.Managers;
+using AccountErp.Managers;
+using AccountErp.Services;
+using Crm.DataLayer;
 using Crm.DataLayer.Repositories;
 using Crm.Infrastructure.DataLayer;
 using Crm.Infrastructure.Managers;
 using Crm.Infrastructure.Repositories;
 using Crm.Infrastructure.Services;
 using Crm.Managers;
-using Crm.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -39,6 +41,7 @@ namespace Crm.Config
             services.AddScoped<IUserRoleManager, UserRoleManager>();
             services.AddScoped<ILeadAssignManager, LeadAssignManager>();
             services.AddScoped<IDashBoardManager, DashBoardManager>();
+            services.AddScoped<IEmailManager, EmailManager>();
 
         }
         public static void ConfigureRepository(IServiceCollection services)
@@ -58,7 +61,7 @@ namespace Crm.Config
         }
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IEmailServiceSendLeadAsync, EmailService>();
         }
     }
 }

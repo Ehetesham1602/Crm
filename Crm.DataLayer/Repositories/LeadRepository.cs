@@ -115,6 +115,7 @@ namespace Crm.DataLayer.Repositories
                                 Status = l.Status,
                                 Phone = l.Phone,
                                 CallStatus = l.CallStatus,
+                                CreatedOn = l.CreatedOn,
                                 Address = new AddressDto
                                 {
                                     Id = l.Address.Id,
