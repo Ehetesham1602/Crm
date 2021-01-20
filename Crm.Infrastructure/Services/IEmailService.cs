@@ -11,6 +11,6 @@ namespace Crm.Infrastructure.Services
         Task SendAsync(string receiver, string senderName, string senderEmail, string subject, string mailBody);
 
        //Task SendWithAttachmentAsync(string email, string subject, string mailBody, string path);
-        Task SendWithAttachmentAsync(string email, string subject, string mailBody);
+        Task SendWithAttachmentAsync(string email, string subject, string mailBody, string path);
     }
 }

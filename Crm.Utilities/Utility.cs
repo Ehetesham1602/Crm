@@ -72,7 +72,7 @@ namespace Crm.Utilities
 
         public static string GetInvoiceFolder(string basePath)
         {
-            var path = $"{basePath}\\invoice\\";
+            var path = $"{basePath}\\EmailAttachment\\";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -141,6 +141,17 @@ namespace Crm.Utilities
         public static string GetEmailAttachmentFileUrl(string baseUrl, string fileName)
         {
             return $"{baseUrl}/EmailAttachment/{fileName}";
+        }
+
+        public static string GetEmailFolder(string basePath)
+        {
+            var path = $"{basePath}\\EmailAttachment\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return path;
         }
     }
 }

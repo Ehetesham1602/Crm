@@ -144,15 +144,16 @@ namespace Crm.Api.Controllers
                 BadRequest("Customer doesn't have email address");
             }
 
-            /*var dirPath = Utility.GetInvoiceFolder(_hostingEnvironment.WebRootPath);
-            var completePath = dirPath + lead.Id + "_" + ".pdf";
+            var dirPath = Utility.GetEmailFolder(_hostingEnvironment.WebRootPath);
+            var completePath = dirPath + model.FileName;
             if (!System.IO.File.Exists(completePath))
             {
-                var renderer = new IronPdf.HtmlToPdf();
-                renderer.RenderHtmlAsPdf(model.Html).SaveAs(completePath);
-            }*/
-            //await _emailManager.SendLeadAsync(lead.Email, completePath);
-            await _emailManager.SendLeadAsync(lead.Email, model);
+                completePath = null;
+                //var renderer = new IronPdf.HtmlToPdf();
+                //renderer.RenderHtmlAsPdf(model.Html).SaveAs(completePath);
+            }
+            await _emailManager.SendLeadAsync(lead.Email,model, completePath);
+           // await _emailManager.SendLeadAsync(lead.Email, model);
             return Ok();
         }
 
@@ -160,7 +161,7 @@ namespace Crm.Api.Controllers
         [Route("upload-attachment")]
         public async Task<IActionResult> UploadAttachment([FromForm] IFormFile file)
         {
-            var dirPath = Utility.GetTempFolder(_hostingEnvironment.WebRootPath);
+            var dirPath = Utility.GetEmailFolder(_hostingEnvironment.WebRootPath);
 
             var fileName = Utility.GetUniqueFileName(file.FileName);
 

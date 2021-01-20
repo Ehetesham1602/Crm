@@ -18,9 +18,9 @@ namespace AccountErp.Managers
         }
 
         //public async Task SendLeadAsync(string email,string attachmentPath)
-        public async Task SendLeadAsync(string email, EmailLeadModel model)
+        public async Task SendLeadAsync(string email, EmailLeadModel model, string attachmentPath)
         {
-            await _emailService.SendWithAttachmentAsync(email ,model.Subject,model.Html );
+            await _emailService.SendWithAttachmentAsync(email ,model.Subject,model.Html, attachmentPath);
         }
     }
 }

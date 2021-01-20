@@ -9,7 +9,7 @@ namespace AccountErp.Infrastructure.Managers
     public interface IEmailManager
     {
         //Task SendInvoAsync(string email, string attachmentPath);
-        //Task SendLeadAsync(string email, string completePath);
-        Task SendLeadAsync(string email, EmailLeadModel model);
+       // Task SendLeadAsync(string email, string completePath, EmailLeadModel model);
+        Task SendLeadAsync(string email, EmailLeadModel model, string completePath);
     }
 }

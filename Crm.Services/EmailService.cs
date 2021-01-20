@@ -66,7 +66,7 @@ namespace AccountErp.Services
         }
 
        // public async Task SendWithAttachmentAsync(string email, string subject, string mailBody, string path)
-        public async Task SendWithAttachmentAsync(string email, string subject, string mailBody)
+        public async Task SendWithAttachmentAsync(string email, string subject, string mailBody, string path)
         {
             //string value = _smtpConfiguration.GetSection("Smtp").GetSection("Smtp").Value;
             var data = appSettings.Value.Port;
@@ -74,20 +74,24 @@ namespace AccountErp.Services
             mimeMessage.From.Add(new MailboxAddress(appSettings.Value.SenderName, appSettings.Value.SenderEmail));
             mimeMessage.To.Add(new MailboxAddress(email));
             mimeMessage.Subject = subject;
+            var multipart = new Multipart();
             var body = new TextPart("plain")
             {
                 Text = mailBody
             };
-           /* var attachment = new MimePart("application/pdf")
-            {
-                Content = new MimeContent(File.OpenRead(path)),
-                ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                ContentTransferEncoding = ContentEncoding.Base64,
-                FileName = Path.GetFileName(path)
-            };*/
-            var multipart = new Multipart();
             multipart.Add(body);
-           // multipart.Add(attachment);
+            if (path != null)
+            {
+                var attachment = new MimePart("application/pdf")
+                {
+                    Content = new MimeContent(File.OpenRead(path)),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = Path.GetFileName(path)
+                };
+                 multipart.Add(attachment);
+            }
+           
             mimeMessage.Body = multipart;
             await SendAsync(mimeMessage);
         }

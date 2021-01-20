@@ -10,6 +10,7 @@ namespace Crm.Models.Email
         public string Html { get; set; }
 
         public string Subject { get; set; }
+        public string FileName { get; set; }
 
     }
 }
