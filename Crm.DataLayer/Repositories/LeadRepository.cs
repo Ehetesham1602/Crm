@@ -52,8 +52,8 @@ namespace Crm.DataLayer.Repositories
             var filerKey = model.Search.Value;
 
             var linqstmt = (from l in _dataContext.Lead
-                            where l.Status != Constants.RecordStatus.Deleted && (filerKey == null || EF.Functions.Like(l.FirstName, "%" + filerKey + "%")
-                            || EF.Functions.Like(l.LastName, "%" + filerKey + "%"))
+                            where l.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(l.FirstName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.LastName, "%" + model.filterKey + "%"))
                             select new LeadDto
                             {
                                 Id = l.Id,
@@ -67,6 +67,7 @@ namespace Crm.DataLayer.Repositories
                                 Status = l.Status,
                                 Phone = l.Phone,
                                 CallStatus = l.CallStatus,
+                                CreatedOn = l.CreatedOn,
                                 Address = new AddressDto
                                 {
                                     Id = l.Address.Id,
