@@ -130,6 +130,7 @@ namespace Crm.DataLayer.Repositories
         public async Task<List<QualifyQuestionDetailDto>> GetAllAsync()
         {
             return await (from s in _dataContext.QualifyQuestion
+                          where s.Status != Constants.RecordStatus.Deleted
                           select new QualifyQuestionDetailDto
                           {
                               Id = s.Id,

@@ -305,6 +305,10 @@ namespace Crm.DataLayer.Migrations
 
                     b.Property<int?>("AddressId");
 
+                    b.Property<int>("CallStatus");
+
+                    b.Property<string>("CompanyName");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(40);
@@ -313,6 +317,8 @@ namespace Crm.DataLayer.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired();
+
+                    b.Property<int?>("ExternalId");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
@@ -336,6 +342,8 @@ namespace Crm.DataLayer.Migrations
 
                     b.Property<DateTime?>("UpdatedOn");
 
+                    b.Property<int?>("UserId");
+
                     b.Property<string>("Website")
                         .IsRequired();
 
@@ -346,6 +354,8 @@ namespace Crm.DataLayer.Migrations
                     b.HasIndex("LeadSourceId");
 
                     b.HasIndex("LeadStatusId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Lead");
                 });
@@ -392,6 +402,27 @@ namespace Crm.DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeadStatus");
+                });
+
+            modelBuilder.Entity("Crm.Entities.LoginModule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("RoleId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<DateTime?>("createdOn");
+
+                    b.Property<bool?>("status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LoginModule");
                 });
 
             modelBuilder.Entity("Crm.Entities.QualifyQuestion", b =>
@@ -711,6 +742,18 @@ namespace Crm.DataLayer.Migrations
                     b.HasOne("Crm.Entities.LeadStatus", "LeadStatus")
                         .WithMany()
                         .HasForeignKey("LeadStatusId");
+
+                    b.HasOne("Crm.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Crm.Entities.LoginModule", b =>
+                {
+                    b.HasOne("Crm.Entities.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Crm.Entities.State", b =>

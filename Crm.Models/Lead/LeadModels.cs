@@ -17,6 +17,8 @@ namespace Crm.Models.Lead
         public string Email { get; set; }
         public string Website { get; set; }
         public string Mobile { get; set; }
+        public string CompanyName { get; set; }
+        public int? ExternalId { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public string Phone { get; set; }
         public int? UserId { get; set; }

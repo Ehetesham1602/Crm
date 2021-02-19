@@ -53,7 +53,8 @@ namespace Crm.DataLayer.Repositories
 
             var linqstmt = (from l in _dataContext.Lead
                             where l.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(l.FirstName, "%" + model.filterKey + "%")
-                            || EF.Functions.Like(l.LastName, "%" + model.filterKey + "%"))
+                            || EF.Functions.Like(l.LastName, "%" + model.filterKey + "%")
+                             || EF.Functions.Like(l.CompanyName, "%" + model.filterKey + "%"))
                             select new LeadDto
                             {
                                 Id = l.Id,
@@ -68,6 +69,7 @@ namespace Crm.DataLayer.Repositories
                                 Phone = l.Phone,
                                 CallStatus = l.CallStatus,
                                 CreatedOn = l.CreatedOn,
+                                CompanyName = l.CompanyName,
                                 Address = new AddressDto
                                 {
                                     Id = l.Address.Id,
@@ -117,6 +119,7 @@ namespace Crm.DataLayer.Repositories
                                 Phone = l.Phone,
                                 CallStatus = l.CallStatus,
                                 CreatedOn = l.CreatedOn,
+                                CompanyName = l.CompanyName,
                                 Address = new AddressDto
                                 {
                                     Id = l.Address.Id,
@@ -156,7 +159,8 @@ namespace Crm.DataLayer.Repositories
                               LeadSourceId = l.LeadSourceId ?? 0,
                               LeadStatusId = l.LeadStatusId ?? 0,
                               Status = l.Status,
-                              Phone = l.Phone
+                              Phone = l.Phone,
+                              CompanyName = l.CompanyName
                               /*LeadSource = new LeadSourceDetailDto
                               {
                                   Name = l.LeadSource.Name,
@@ -200,6 +204,7 @@ namespace Crm.DataLayer.Repositories
                                       LeadStatusId = l.LeadStatusId ?? 0,
                                       Status = l.Status,
                                       Phone = l.Phone,
+                                      CompanyName = l.CompanyName
                                       /*LeadSource = new LeadSourceDetailDto
                                       {
                                           Name = l.LeadSource.Name,
@@ -230,7 +235,17 @@ namespace Crm.DataLayer.Repositories
 
             return linqstmt;
         }
+        public LeadDtoForCountcs GetAllCount()
+        {
+            LeadDtoForCountcs leadDtoForCountcs = new LeadDtoForCountcs();
+            leadDtoForCountcs.CallDone = _dataContext.Lead.Count(x => x.CallStatus == Constants.LeadCallStatus.CallDone).ToString();
+            leadDtoForCountcs.NotDone = _dataContext.Lead.Count(x => x.CallStatus == Constants.LeadCallStatus.NotDone).ToString();
+            leadDtoForCountcs.AllLead = _dataContext.Lead.Count().ToString();
 
+            return leadDtoForCountcs;
+        }
 
     }
+
+  
 }

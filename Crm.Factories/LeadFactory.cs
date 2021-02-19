@@ -51,7 +51,8 @@ namespace Crm.Factories
             entity.Phone = model.Phone;
             entity.UpdatedBy = userId ?? "0";
             entity.UpdatedOn = Utility.GetDateTime();
-            
+            entity.CompanyName = model.CompanyName;
+
             //if (!model.Address.Id.HasValue && model.Address.IsAllNullOrEmpty())
             //{
             //    return;
@@ -79,6 +80,8 @@ namespace Crm.Factories
                 Website = model.Website,
                 Mobile = model.Mobile,
                 Status = Constants.RecordStatus.Active,
+                CompanyName = model.CompanyName,
+                ExternalId = model.ExternalId,
                 Phone = model.Phone,
                 CreatedBy = userId ?? "0",
                 CreatedOn = Utility.GetDateTime(),
@@ -96,6 +99,7 @@ namespace Crm.Factories
             entity.Mobile = model.Mobile;
             entity.Phone = model.Phone;
             entity.UpdatedBy = userId ?? "0";
+                entity.CompanyName = model.CompanyName;
             entity.UpdatedOn = Utility.GetDateTime();
             entity.UserId = model.UserId;
             entity.CallStatus = model.CallStatus;

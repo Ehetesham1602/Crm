@@ -17,6 +17,8 @@ namespace Crm.Entities
         public string Mobile { get; set; }
         public int? LeadSourceId { get; set; }
         public int? LeadStatusId { get; set; }
+        public string CompanyName { get; set; }
+        public int? ExternalId { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }

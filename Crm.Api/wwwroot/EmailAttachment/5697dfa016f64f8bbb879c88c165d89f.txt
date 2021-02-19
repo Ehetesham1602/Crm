@@ -1,0 +1,20 @@
+1	1	Cash and Bank
+2	1	Money in Transit
+3	1	Expected Payments from Customers
+4	1	Inventory
+5	1	Property,Plant,Equipment
+6	2	Credit Card
+7	2	Loan and Line of Credit
+8	2	Expected Payment to Vendors
+9	2	Sales Taxes
+10	2	Due for Payroll
+11	3	Income
+12	3	Discount
+13	3	Other Income
+14	3	Uncategorized Income
+15	4	Accounting Fees
+16	4	Advertising & Promotions
+17	4	Bank Service Charges
+18	5	Business Owner Contribution and Drawing
+19	5	Retained Earning:Profit
+NULL	NULL	NULL

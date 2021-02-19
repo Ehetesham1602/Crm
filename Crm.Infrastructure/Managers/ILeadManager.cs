@@ -18,5 +18,6 @@ namespace Crm.Infrastructure.Managers
         Task<List<LeadDto>> GetAllLead();
         Task AddLeadAsync(List<LeadModels> model);
         Task<JqDataTableResponse<LeadDto>> GetPagedResultAsyncById(JqDataTableRequest model);
+        LeadDtoForCountcs GetAllCount();
     }
 }

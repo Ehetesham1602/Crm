@@ -86,5 +86,10 @@ namespace Crm.Managers
             }
             await _unitOfWork.SaveChangesAsync();
         }
+        public LeadDtoForCountcs GetAllCount()
+        {
+           return  _leadRepository.GetAllCount();
+        }
     }
+   
 }

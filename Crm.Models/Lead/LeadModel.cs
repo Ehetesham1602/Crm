@@ -18,6 +18,8 @@ namespace Crm.Models.Lead
         public string Mobile { get; set; }
         public int? LeadSourceId { get; set; }
         public int? LeadStatusId { get; set; }
+        public string CompanyName { get; set; }
+        public int? ExternalId { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public AddressModel Address { get; set; }
         public string Phone { get; set; }

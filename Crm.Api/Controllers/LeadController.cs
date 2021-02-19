@@ -176,5 +176,12 @@ namespace Crm.Api.Controllers
                 fileUrl = Utility.GetEmailAttachmentFileUrl(Request.GetBaseUrl(), fileName)
             });
         }
+
+        [HttpGet]
+        [Route("get-AllCount")]
+        public IActionResult GetAllCount()
+        {
+            return Ok( _leadManager.GetAllCount());
+        }
     }
 }
