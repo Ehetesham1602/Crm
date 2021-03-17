@@ -5,27 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200825064727_TransactionTableChange25082020.cs" />
-    <Compile Remove="Migrations\20200825064727_TransactionTableChange25082020.Designer.cs" />
-    <Compile Remove="Migrations\20200825081813_TransactionTableChange25082020.cs" />
-    <Compile Remove="Migrations\20200825081813_TransactionTableChange25082020.Designer.cs" />
-    <Compile Remove="Migrations\20200908091315_accountStructureChange08092020.cs" />
-    <Compile Remove="Migrations\20200908091315_accountStructureChange08092020.Designer.cs" />
-    <Compile Remove="Migrations\20200910080036_accountStructureChange10092020.cs" />
-    <Compile Remove="Migrations\20200910080036_accountStructureChange10092020.Designer.cs" />
-    <Compile Remove="Migrations\20200913183855_db_new14092020.cs" />
-    <Compile Remove="Migrations\20200913183855_db_new14092020.Designer.cs" />
-    <Compile Remove="Migrations\20201223103249_loginmodulechange23122020.cs" />
-    <Compile Remove="Migrations\20201223103249_loginmodulechange23122020.Designer.cs" />
-    <Compile Remove="Migrations\20201223104702_loginmodulechange23122020.cs" />
-    <Compile Remove="Migrations\20201223104702_loginmodulechange23122020.Designer.cs" />
-    <Compile Remove="Migrations\20201223105525_loginmodulechange23122020.cs" />
-    <Compile Remove="Migrations\20201223105525_loginmodulechange23122020.Designer.cs" />
-    <Compile Remove="Migrations\20201223110029_loginmodulechange23122020.cs" />
-    <Compile Remove="Migrations\20201223110029_loginmodulechange23122020.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />

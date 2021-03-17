@@ -14,11 +14,11 @@ namespace Crm.DataLayer.EntityConfigurations
             builder.ToTable("Lead");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.FirstName).IsRequired();
-            builder.Property(x => x.LastName).IsRequired();
-            builder.Property(x => x.Email).IsRequired();
-            builder.Property(x => x.Website).IsRequired();
-            builder.Property(x => x.Mobile).IsRequired();
+            builder.Property(x => x.FirstName).IsRequired().IsRequired(false);
+            builder.Property(x => x.LastName).IsRequired().IsRequired(false);
+            builder.Property(x => x.Email).IsRequired().IsRequired(false);
+            builder.Property(x => x.Website).IsRequired().IsRequired(false);
+            builder.Property(x => x.Mobile).IsRequired().IsRequired(false);
             builder.Property(x => x.LeadSourceId).IsRequired(false);
             builder.Property(x => x.LeadStatusId).IsRequired(false);
             builder.Property(x => x.AddressId).IsRequired(false);

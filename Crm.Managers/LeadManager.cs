@@ -72,12 +72,12 @@ namespace Crm.Managers
             LeadModels lead = new LeadModels();
           
 
-            List<LeadModels> distinct = model.GroupBy(x => new { x.FirstName, x.LastName, x.Email, x.Mobile })
+            List<LeadModels> distinct = model.GroupBy(x => new { x.Phone })
                                         .Select(x => x.First())
                                         .ToList();
-            List<LeadModels> distinctContact = model.GroupBy(x => new { x.Mobile })
+            /*List<LeadModels> distinctContact = model.GroupBy(x => new { x.Mobile })
                                      .Select(x => x.First())
-                                     .ToList();
+                                     .ToList();*/
 
             foreach (var addLead in distinct)
             {
