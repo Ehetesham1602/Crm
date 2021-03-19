@@ -48,23 +48,37 @@ namespace Crm.Managers
             var leadCount = leadList.Count();
             var userCount = userList.Count();
             var size = leadCount / userCount;
-            if (leadCount % 2 != 0)
-            {
-                size = size + 1;
-            }
-            int k = 0;
-            for (int i = 0; i < userCount; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    if (k < leadCount)
-                    {
-                        leadList[k].UserId = userList[i].Id;
-                    }
-                    k++;
-                }
 
+            if(userCount > leadCount)
+            {
+                for (int i = 0; i < leadCount; i++)
+                {
+                   
+                            leadList[i].UserId = userList[i].Id;
+                        }
+                  
             }
+            else
+            {
+                if (leadCount % 2 != 0)
+                {
+                    size = size + 1;
+                }
+                int k = 0;
+                for (int i = 0; i <= userCount; i++)
+                {
+                    for (int j = 0; j <= size; j++)
+                    {
+                        if (k < leadCount)
+                        {
+                            leadList[k].UserId = userList[i].Id;
+                        }
+                        k++;
+                    }
+
+                }
+            }
+           
             foreach (var value in leadList)
             {
                 Lead lead = new Lead();
@@ -106,9 +120,9 @@ namespace Crm.Managers
                 size = size + 1;
             }
             int k = 0;
-            for (int i = 0; i < userCount; i++)
+            for (int i = 0; i <= userCount; i++)
             {
-                for (int j = 0; j < size; j++)
+                for (int j = 0; j <= size; j++)
                 {
                     if (k < leadCount)
                     {
@@ -126,8 +140,12 @@ namespace Crm.Managers
                 LeadAssignDto tempLeadDto = new LeadAssignDto();
                 tempLeadDto.LeadCount = item.Values.Count();
                 var user = await _userRepository.GetAsync(item.GroupId ?? 0);
-                tempLeadDto.AgentName = user.FirstName + " " + user.LastName;
-                leadDto.Add(tempLeadDto);
+                if(user != null)
+                {
+                    tempLeadDto.AgentName = user.FirstName + " " + user.LastName;
+                    leadDto.Add(tempLeadDto);
+
+                }
 
 
             }
