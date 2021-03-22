@@ -41,15 +41,32 @@ namespace Crm.Managers
             _unitOfWork = unitOfWork;
             _dataContext = dataContext;
         }
-        public async Task EditAsync()
+        public async Task EditAsync(List<LeadAssignModel> leadAssignModels)
         {
-            List<LeadDto> leadList = await _leadAssignRepository.GetAllLead();
-            List<UserDetailDto> userList = await _leadAssignRepository.GetAllUser();
+
+            foreach (var item in leadAssignModels)
+            {
+                List<LeadDto> leadListAssign = await _leadAssignRepository.GetAllLead(item.NoOfLeads);
+                for (int i = 0; i < leadListAssign.Count(); i++)
+                {
+
+                    leadListAssign[i].UserId = item.AgentId;
+                }
+                foreach (var value in leadListAssign)
+                {
+                    Lead lead = new Lead();
+                    LeadFactory.updateLead(value, lead, _userId);
+                    _leadRepository.Edit(lead);
+
+                }
+                await _unitOfWork.SaveChangesAsync();
+            }
+            /*List<UserDetailDto> userList = await _leadAssignRepository.GetAllUser();
             var leadCount = leadList.Count();
             var userCount = userList.Count();
-            var size = leadCount / userCount;
+            var size = leadCount / userCount;*/
 
-            if(userCount > leadCount)
+            /*if(userCount > leadCount)
             {
                 for (int i = 0; i < leadCount; i++)
                 {
@@ -77,16 +94,10 @@ namespace Crm.Managers
                     }
 
                 }
-            }
+            }*/
+            
            
-            foreach (var value in leadList)
-            {
-                Lead lead = new Lead();
-                LeadFactory.updateLead(value, lead, _userId);
-                _leadRepository.Edit(lead);
-
-            }
-            await _unitOfWork.SaveChangesAsync();
+         
 
         }
         public async Task<List<LeadDto>> GetByAgentIdAsync(int id)
@@ -107,49 +118,26 @@ namespace Crm.Managers
             await _leadAssignRepository.ChangeCallStatusByIdAsync(changeCallStatusModel);
             await _unitOfWork.SaveChangesAsync();
         }
-         public async Task<List<LeadAssignDto>> GetLeadAssignInfoAsync()
+        public async Task<LeadAssignMainDto> GetLeadAssignInfoAsync()
         {
-            List<LeadAssignDto> leadDto = new List<LeadAssignDto>();
-            List<LeadDto> leadList = await _leadAssignRepository.GetAllLead();
+            LeadAssignMainDto leadAssignMainObj = new LeadAssignMainDto();
+            List<LeadDto> leadList = await _leadAssignRepository.GetAllLeadWithoutAssign();
+            List<LeadDto> leadListtop = await _leadAssignRepository.GetAllLeadTop100();
             List<UserDetailDto> userList = await _leadAssignRepository.GetAllUser();
-            var leadCount = leadList.Count();
-            var userCount = userList.Count();
-            var size = leadCount / userCount;
-            if (leadCount % 2 != 0)
+            List<LeadAssignDto> leadAssignDtosList = new List<LeadAssignDto>();
+            foreach (var user in userList)
             {
-                size = size + 1;
-            }
-            int k = 0;
-            for (int i = 0; i <= userCount; i++)
-            {
-                for (int j = 0; j <= size; j++)
-                {
-                    if (k < leadCount)
-                    {
-                        leadList[k].UserId = userList[i].Id;
-                    }
-                    k++;
-                }
+                LeadAssignDto leadAssignObj = new LeadAssignDto();
+                leadAssignObj.AgentId = user.Id;
+                leadAssignObj.AgentName = user.FirstName + " " + user.LastName;
+                leadAssignDtosList.Add(leadAssignObj);
 
             }
-            var itemsList = (leadList.GroupBy(l => l.UserId, l => new { l.LastName, l.FirstName })
-                            .Select(g => new { GroupId = g.Key, Values = g.ToList() })).ToList();
-
-            foreach (var item in itemsList)
-            {
-                LeadAssignDto tempLeadDto = new LeadAssignDto();
-                tempLeadDto.LeadCount = item.Values.Count();
-                var user = await _userRepository.GetAsync(item.GroupId ?? 0);
-                if(user != null)
-                {
-                    tempLeadDto.AgentName = user.FirstName + " " + user.LastName;
-                    leadDto.Add(tempLeadDto);
-
-                }
-
-
-            }
-            return leadDto;
+            leadAssignMainObj.leadAssignDtosList = leadAssignDtosList;
+            leadAssignMainObj.LeadTotalCount = leadList.Count();
+            leadAssignMainObj.TotalCount = leadListtop.Count();
+            
+            return leadAssignMainObj;
         }
 
     }

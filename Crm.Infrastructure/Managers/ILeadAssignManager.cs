@@ -11,11 +11,12 @@ namespace Crm.Infrastructure.Managers
 {
     public interface ILeadAssignManager
     {
-        Task EditAsync();
+        Task EditAsync(List<LeadAssignModel> leadAssignModels);
+        //  Task EditAsync();
         //Task EditAsync(List<LeadDto> leadList);
         Task<List<LeadDto>> GetByAgentIdAsync(int id);
         //Task UpdateCallStatusAsync(int id);
         Task ChangeCallStatusByIdAsync(ChangeCallStatusModel changeCallStatusModel);
-        Task<List<LeadAssignDto>> GetLeadAssignInfoAsync();
+        Task<LeadAssignMainDto> GetLeadAssignInfoAsync();
     }
 }

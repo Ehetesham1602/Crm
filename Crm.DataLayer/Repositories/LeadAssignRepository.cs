@@ -48,7 +48,7 @@ namespace Crm.DataLayer.Repositories
 
             return linqstmt;
         }
-        public async Task<List<LeadDto>> GetAllLead()
+        public async Task<List<LeadDto>> GetAllLead(int NoOfLead)
         {
             var linqstmt = await (from l in _dataContext.Lead
                                   where l.Status != Constants.RecordStatus.Deleted && l.CallStatus == Constants.LeadCallStatus.NotDone && l.UserId == null
@@ -68,7 +68,7 @@ namespace Crm.DataLayer.Repositories
                                       CallStatus = l.CallStatus
 
                                   })
-                            .AsNoTracking().Take(100)
+                            .AsNoTracking().Take(NoOfLead)
                             .ToListAsync();
 
             return linqstmt;
@@ -109,11 +109,63 @@ namespace Crm.DataLayer.Repositories
             
             return linq;
         }*/
-        public async Task ChangeCallStatusByIdAsync(ChangeCallStatusModel changeCallStatusModel )
+        public async Task ChangeCallStatusByIdAsync(ChangeCallStatusModel changeCallStatusModel)
         {
             var lead = await _dataContext.Lead.FindAsync(changeCallStatusModel.Id);
             lead.CallStatus = changeCallStatusModel.CallStatus;
             _dataContext.Lead.Update(lead);
         }
+
+        public async Task<List<LeadDto>> GetAllLeadWithoutAssign()
+        {
+            var linqstmt = await (from l in _dataContext.Lead
+                                  where l.Status != Constants.RecordStatus.Deleted && l.CallStatus == Constants.LeadCallStatus.NotDone && l.UserId == null
+                                  select new LeadDto
+                                  {
+                                      Id = l.Id,
+                                      FirstName = l.FirstName,
+                                      LastName = l.LastName,
+                                      Email = l.Email,
+                                      Website = l.Website,
+                                      Mobile = l.Mobile,
+                                      LeadSourceId = l.LeadSourceId ?? 0,
+                                      LeadStatusId = l.LeadStatusId ?? 0,
+                                      Status = l.Status,
+                                      Phone = l.Phone,
+                                      UserId = l.UserId ?? 0,
+                                      CallStatus = l.CallStatus
+
+                                  })
+                            .AsNoTracking()
+                            .ToListAsync();
+
+            return linqstmt;
+        }
+        public async Task<List<LeadDto>> GetAllLeadTop100()
+        {
+            var linqstmt = await (from l in _dataContext.Lead
+                                  where l.Status != Constants.RecordStatus.Deleted && l.CallStatus == Constants.LeadCallStatus.NotDone && l.UserId == null
+                                  select new LeadDto
+                                  {
+                                      Id = l.Id,
+                                      FirstName = l.FirstName,
+                                      LastName = l.LastName,
+                                      Email = l.Email,
+                                      Website = l.Website,
+                                      Mobile = l.Mobile,
+                                      LeadSourceId = l.LeadSourceId ?? 0,
+                                      LeadStatusId = l.LeadStatusId ?? 0,
+                                      Status = l.Status,
+                                      Phone = l.Phone,
+                                      UserId = l.UserId ?? 0,
+                                      CallStatus = l.CallStatus
+
+                                  })
+                            .AsNoTracking().Take(100)
+                            .ToListAsync();
+
+            return linqstmt;
+        }
+
     }
 }

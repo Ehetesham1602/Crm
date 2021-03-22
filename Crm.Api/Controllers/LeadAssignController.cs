@@ -34,7 +34,7 @@ namespace Crm.Api.Controllers
         }
         [HttpPost]
         [Route("edit")]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(List<LeadAssignModel> leadAssignModels)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace Crm.Api.Controllers
             }
             try
             {
-                await _leadAssignManager.EditAsync();
+                await _leadAssignManager.EditAsync(leadAssignModels);
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace Crm.Api.Controllers
         }
         [HttpGet]
         [Route("get-lead-assign-info")]
-        public async Task<List<LeadAssignDto>> GetLeadAssignInfoAsync()
+        public async Task<LeadAssignMainDto> GetLeadAssignInfoAsync()
         {
             return await _leadAssignManager.GetLeadAssignInfoAsync();
 
