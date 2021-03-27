@@ -15,6 +15,9 @@ namespace Crm.Infrastructure.Repositories
         Task LoginAddAsync(LoginModule entity);
         void Edit(User entity);
 
+        void ChangePassword(User entity);
+
+
         Task<User> GetAsync(int id);
 
         Task<UserDetailDto> GetDetailAsync(int id);

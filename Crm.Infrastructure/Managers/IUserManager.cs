@@ -12,7 +12,10 @@ namespace Crm.Infrastructure.Managers
     {
         Task AddAsync(UserLoginDto model);
         Task LoginAddAsync(UserDetailDto model);
-        Task EditAsync(UserLoginDto model);
+        Task EditAsync(UserRegistrationEditModel model);
+
+      Task ChangePassword(UserChangePasswordModel model);
+
 
         Task<UserDetailDto> GetDetailAsync(int id);
 

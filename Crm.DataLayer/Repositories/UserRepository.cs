@@ -37,6 +37,11 @@ namespace Crm.DataLayer.Repositories
             _dataContext.User.Update(entity);
         }
 
+        public void ChangePassword(User entity)
+        {
+            _dataContext.User.Update(entity);
+        }
+
         public async Task<User> GetAsync(int id)
         {
             return await _dataContext.User.FindAsync(id);
@@ -56,7 +61,9 @@ namespace Crm.DataLayer.Repositories
                               Mobile = s.Mobile,
                               Email = s.Email,
                               RoleId = s.RoleId,
-                              RoleName = s.Role.RoleName
+                              RoleName = s.Role.RoleName,
+                              Extention_no=s.Extention_no
+
                           })
                           .AsNoTracking()
                           .SingleOrDefaultAsync();

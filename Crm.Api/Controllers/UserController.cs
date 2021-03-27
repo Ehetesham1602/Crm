@@ -55,7 +55,7 @@ namespace Crm.Api.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public async Task<IActionResult> Edit([FromBody] UserLoginDto model)
+        public async Task<IActionResult> Edit([FromBody] UserRegistrationEditModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -65,6 +65,26 @@ namespace Crm.Api.Controllers
             try
             {
                 await _manager.EditAsync(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
+        }
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePass([FromBody] UserChangePasswordModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorList());
+            }
+
+            try
+            {
+                await _manager.ChangePassword(model);
             }
             catch (Exception ex)
             {

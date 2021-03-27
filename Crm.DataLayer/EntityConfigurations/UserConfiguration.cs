@@ -23,6 +23,7 @@ namespace Crm.DataLayer.EntityConfigurations
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.Mobile).IsRequired();
+            builder.Property(x => x.Extention_no).IsRequired(false);
             builder.Property(x => x.RoleId).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();

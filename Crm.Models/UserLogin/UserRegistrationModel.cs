@@ -14,5 +14,7 @@ namespace Crm.Models.UserLogin
         public string Password { get; set; }
         public string Mobile { get; set; }
         public int RoleId { get; set; }
+        public int Extention_no { get; set; }
+
     }
 }

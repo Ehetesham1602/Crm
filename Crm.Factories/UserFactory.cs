@@ -21,19 +21,21 @@ namespace Crm.Factories
                 Password = Utility.Encrypt(model.Password),
                 Mobile = model.Mobile,
                 RoleId = model.RoleId,
+                Extention_no=model.Extention_no,
                 Status = Constants.RecordStatus.Active,
                 CreatedBy = userId ?? "0",
                 CreatedOn = Utility.GetDateTime(),
             };
             return data;
         }
-        public static void Create(UserLoginDto model, User entity, string userId)
+        public static void Create(UserRegistrationEditModel model, User entity, string userId)
         {
             entity.FirstName = model.FirstName;
             entity.LastName = model.LastName;
             entity.UserName = model.UserName;
             entity.Email = model.Email;
             entity.RoleId = model.RoleId;
+            entity.Extention_no = model.Extention_no;
           //  entity.Password = Utility.Encrypt(model.Password);
             entity.Mobile = model.Mobile;
             entity.UpdatedBy = userId ?? "0";
@@ -51,6 +53,15 @@ namespace Crm.Factories
                 RoleId = model.RoleId
             };
             return data;
+        }
+
+        public static void ChangePassword(UserChangePasswordModel model, User entity, string userId)
+        {
+
+            entity.UpdatedBy = userId ?? "0";
+            entity.UpdatedOn = Utility.GetDateTime();
+            entity.Password = Utility.Encrypt(model.Password);
+
         }
     }
 }

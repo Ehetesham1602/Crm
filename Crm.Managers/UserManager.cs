@@ -42,11 +42,19 @@ namespace Crm.Managers
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task EditAsync(UserLoginDto model)
+        public async Task EditAsync(UserRegistrationEditModel model)
         {
             var item = await _repository.GetAsync(model.Id);
             UserFactory.Create(model, item, _userId);
             _repository.Edit(item);
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task ChangePassword(UserChangePasswordModel model)
+        {
+            var item = await _repository.GetAsync(model.Id);
+            UserFactory.ChangePassword(model, item, _userId);
+            _repository.ChangePassword(item);
             await _unitOfWork.SaveChangesAsync();
         }
 

@@ -15,11 +15,15 @@ namespace Crm.Entities
         public string Password { get; set; }
         public string Mobile { get; set; }
         public int RoleId { get; set; }
+        public int? Extention_no { get; set; }
         public Constants.RecordStatus Status { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public UserRole Role { get; set; }
+
+        
+
     }
 }
