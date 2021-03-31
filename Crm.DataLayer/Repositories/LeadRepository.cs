@@ -54,7 +54,9 @@ namespace Crm.DataLayer.Repositories
             var linqstmt = (from l in _dataContext.Lead
                             where l.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(l.FirstName, "%" + model.filterKey + "%")
                             || EF.Functions.Like(l.LastName, "%" + model.filterKey + "%")
-                             || EF.Functions.Like(l.CompanyName, "%" + model.filterKey + "%"))
+                             || EF.Functions.Like(l.CompanyName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.Phone, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.Email, "%" + model.filterKey + "%"))
                             select new LeadDto
                             {
                                 Id = l.Id,
@@ -104,7 +106,11 @@ namespace Crm.DataLayer.Repositories
 
             var linqstmt = (from l in _dataContext.Lead
                             where l.UserId == model.filterKeyId && l.Status != Constants.RecordStatus.Deleted && (model.filterKey == null || EF.Functions.Like(l.FirstName, "%" + model.filterKey + "%")
-                            || EF.Functions.Like(l.LastName, "%" + filerKey + "%"))
+                            || EF.Functions.Like(l.LastName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.CompanyName, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.Phone, "%" + model.filterKey + "%")
+                            || EF.Functions.Like(l.Email, "%" + model.filterKey + "%"))
+
                             select new LeadDto
                             {
                                 Id = l.Id,
